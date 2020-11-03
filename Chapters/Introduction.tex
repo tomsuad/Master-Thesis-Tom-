@@ -1,0 +1,139 @@
+\chapter{Introduction} % Main chapter title
+\label{Chapter1}
+%\section {Problem of Interest}
+We consider the following question: to what extent are standard secret sharing scheme and protocols for secure MPC that build on them resilient to leakage? 
+
+We focus on a simple local leakage model, where the adversary can apply an arbitrary function of a bounded output length to the secret state of each party, but cannot otherwise learn joint information about the state. In secure MPC we create methods for parties to jointly compute a function over their inputs while keeping those inputs private. In our local leakage model the inputs are the secret states. We focused on linear secret sharing schemes and MPC protocols that build on them. 
+
+In the presence of local leakage from each secret share, our objective is to characterize the specific security achieved by these secret-sharing schemes. 
+
+
+\section {Motivation}
+
+Traditionally, we interpret participants in cryptographic protocols as impervious objects interacting with their computing devices remaining shielded from all external snooping or meddling. 
+However, sophisticated side-channel attacks have increasingly proven this assumption false. 
+Private keys, for example, may leak during storage or computation via surprisingly novel side-channel attacks~\cite{USENIX:HSH+08}. 
+The cryptographic protocols are typically not designed to be robust to such leakage. 
+However, some primitives have turned out to be robust to such leakage attacks~\cite{C:BDIR18}. 
+
+One such fundamental primitive is secret-sharing schemes. 
+In the presence of local leakage from each secret share, our objective is to characterize the specific security achieved by these secret-sharing schemes. 
+For example, if an adversary can perform one-bit local leakage from each party's secret share, then any linear secret-sharing scheme over fields of characteristic two is rendered entirely insecure; because an adversary who learns the last bit of each secret share can reconstruct the last bit of the secret as well. 
+
+As a result, there are compilers to convert a linear secret sharing scheme into one that is resilient to $m$-bit local leakage from every share. 
+However, the leakage-resilient counterpart may not be able to replace every instance of the original secret sharing scheme. 
+%However, not every instance of a secret sharing scheme may be replaced by its leakage-resilient counterpart. 
+The scenarios where one uses these secret-sharing possibly rely on other salient features innate to them, for example, their additive nature, their ability to participate in cut-and-choose protocols, and their ability to efficiently correct errors during reconstruction. 
+Typically, one may use linear secret sharing schemes (over large prime fields) for secure data aggregation (for example, performing the summation of private inputs of parties) in the presence of malicious participants. 
+A reduction in the reconstruction threshold of these linear secret sharing schemes directly translates into the ability to tolerate a higher number of (colluding) malicious parties in the secure computation protocol. 
+
+Consequently, there is a significant interest in constructing secret-sharing schemes with lower reconstruction threshold. 
+However, ensuring local leakage resilience may require the reconstruction threshold to be high. 
+This paper studies the reconstruction threshold necessary for some fundamental secret-sharing schemes.
+
+
+
+\section {Our Contribution}
+
+
+%Our paper makes a two-form contribution towards enhancing our understanding of local leakage resileience of secret-sharing schemes over prime-order fields. 
+Our paper makes a contribution towards enhancing our understanding of local leakage resilience of secret-sharing schemes over prime-order fields. Briefly, in this setting, an adversary chooses an arbitrary vector of leakage functions with $m$ bit output each to be applied to every share, and receives the output of these functions to a random sharing of a secret. Its goal is to distinguish between some pair of secrets with as large an advantage as possible. The $m$-leakage error of a scheme corresponds to the distinguishing advantage of the best such adversary. %See~\cite{C:BDIR18} for more details and motivation on the setting.
+
+We focus on the easiest case for local leakage resilience of $m=1$ bits of leakage, which is still far from understood. First, we study the local leakage resilience of Shamir secret-sharing scheme.
+
+
+%%%
+\begin{theorem}
+\textbf{(Shamir Secret Sharing: Reconstruction Threshold for One-bit Leakage).} Consider $(n,t)$-Shamir secret sharing scheme over a prime-order field $\bbF_p$, where $t$ is the
+reconstruction threshold. 
+If the reconstruction threshold satisfies $t\geq 0.867n$ then the leakage error for $m=1$ is at most $2^{-\Omega(n)}$. 
+\end{theorem}
+
+Recently, Benhamouda, Degwekar, Ishai, and Rabin~\cite{C:BDIR18} proved that the threshold needs to be $t\geq 0.907n$.
+\footnote{Our techniques can be used to improve the upper bounds for larger $m$ appearing in~\cite{C:BDIR18} to a certain extent, but we explicitly state the results for $m=1$ for simplicity and clarity.
+  The eprint version of their paper~\cite{EPRINT:BDIR19} claims a smaller constant in Theorem 1.2., which is a consequence of an incorrect calculation.
+  We have interacted with the authors to ensure that the constant mentioned here is an accurate reflection of their result. 
+}
+The decrease in the reconstruction threshold for Shamir's secret sharing scheme potentially helps increase the security of its applications, for example, in the context of secure aggregation of private inputs, it increases the threshold for the number of colluding and malicious parties. 
+Shamir's scheme is in fact a special case of a linear scheme for $(n,t)$-threshold access structure
+derived from a linear $\mdscode{n+1}{\codedim}{\F_p}$ codes via~\cite{Mas95}. 
+In fact, both our and~\cite{C:BDIR18}'s result holds for every such scheme derived from an MDS code as described above - hereafter referred as `a Massey scheme'.
+
+Next, we proceed to exploring whether the structure of linear {\em maximum distance separable} (MDS) codes have some inimical property to local leakage resilience. 
+Towards this objective, we explore the local leakage resilience of random linear MDS codes over prime-order fields of sufficiently large (yet still practical) size. We prove that, roughly, a random Massey scheme is $m$-leakage resilient for constant $m$ for $t$ arbitrarily close to $n/2$ with high probability.
+
+
+%%%
+\begin{theorem}
+\textbf{(Random MDS Codes: Reconstruction Threshold for Constant Leakage).}
+Fix a constant $\delta\in(0,1/2)$ and a constant leakage threshold $m$. 
+Let $n$ be the number of parties receiving the secret shares. 
+Let $C$ be a random MDS code over a prime-order field $\bbF=\bbF_p$ such that $\abs\bbF = 2^{O_{\delta,m}(n)}$. 
+Let $Sh_C$ be the secret sharing scheme corresponding to the code $C$ with reconstruction threshold $t$.  
+An adversary can perform at most $m$-bit leakage from each party's secret share. 
+If the reconstruction threshold of $Sh_C$ is $t\geq (1/2 +\delta)n$ then it is $m$-leakage
+resilient with leakage error $2^{-\Omega(n)}$ with overwhelming probability over the choice of $C$. 
+\end{theorem}
+
+Our proof of the above theorem is non-constructive, making use of the probabilistic method (overcoming some technical hurdles to get reasonable parameters for the size of $p$). This leaves open the intriguing question of whether a threshold below $n/2$ is possible. A positive answer would open the door to ``BGW-based'' information-theoretic leakage resilient MPC with honest majority for general functions in the \emph{plain model}.\footnote{Leakage resilient MPC has been constructed in various setting based on leakage resilient secret sharing schemes constructed using general compilers as described above against local leakage with very large $m$, approaching share size. However, these compilers do not preserve linearity of the secret sharing scheme, for instance, incurring additional overhead on the resulting MPC scheme.} 
+As we show below, new analysis techniques are required to resolve this question.
+
+%%%
+\paragraph{On applications to MPC.}
+Leakage resilient MPC has been constructed in various setting based on leakage resilient secret sharing schemes constructed using general compilers as described above against local leakage with very large $m$, approaching share size. However, these compilers do not preserve linearity of the secret sharing scheme, for instance, incurring additional overhead on the resulting MPC scheme. 
+Furthermore, it is important to note that achieving an LSSS for $t<0.5n$ is not directly sufficient for general MPC. 
+The LSSS should also be multiplicative, as is Shamir's scheme, but additional linear schemes have this property as well (see~\cite{CDM00} for details ). We hope that if we manage to prove that a random $[n,t,\F_p]$ linear code is an LSSS with high probability, we will be able to make a similar argument for random multiplicative additive codes.
+
+All our positive results proceed by undertaking a Fourier analytic approach to the problem of upper bounding the distinguishing advantage for $m$-bit local leakage from each party's secret share.
+In particular, our bound for Shamir secret sharing proceeds along the lines of~\cite{C:BDIR18}'s analysis, and we gain extra advantage by more precise accounting for the  
+0-coordinates of the dual code $C^\bot$ of the Reed-Solomon code corresponding to Shamir's secret sharing. In a nutshell, this helps as these 0-coordinates correspond to the 0-Fourier coefficients of certain boolean functions related to the leakage functions, which are the largest coefficients. For a given local leakage function vector, the leakage error is such that many large coefficients in a single codeword of $C^\bot$ make a large contribution to the overall achievable leakage error. 
+
+The analysis of the second result proceeds by carefully carrying out subtle accounting for the magnitude of Fourier coefficients.  In some more detail, we observe that non-0 coefficients may be large as well, and rely on Parseval's identity to bound their number in each coordinates' leakage function. Then, we prove that with high probability over the choice of the code, only few codewords of $C^\bot$ have "many" coordinates corresponding to large Fourier coefficients simultaneously, so their overall contribution to the maximal achievable leakage advantage can not be very large.
+
+We also extend the known lower-bounds for locally leakage-resilient secret sharing schemes that are constructed from MDS error-correcting codes.
+First, we observe that $\codedim$, the dimension of the error-correcting code, cannot be very small relative to $n$, if an exponentially-small local leakage resilience of $\epsilon=2^{-\Omega(n)}$ is to be achieved even for $m=1$ bit of local leakage from each share, for any field size $p$.
+In particular, we must have $\codedim=\Omega(n/\log(n))$.
+Previously, a similar bound was known only for fields of size polynomial in $n$~\cite{NS20}.% Cite Simkin.
+
+We make an additional observation regarding natural hurdles to proving the result for $\codedim < n/2$ using Fourier analytic techniques common in this field. 
+Consider an approach where we bound the Fourier coefficients using only their absolute values and rely on the Parseval's identity. 
+Then, such approaches shall fail in meaningfully bounding the distinguishing advantage. 
+We provide a (hypothetical) Fourier spectrum that is transparent to the class of techniques used in the line of work.
+In this example, the upper-bound for the distinguishing advantage diverges with the field size $p$. 
+
+%%%
+\begin{theorem}
+\textbf{(Lower bound on $\codedim$).}
+ Let $C$ denote an linear $\mdscode{n+1}{\codedim}{\F_p}$ code  such that the corresponding $(k,n)$-secret sharing scheme $(Sh_C,Rec_C)$ has leakage resilience $\epsilon=2^{-\Omega(n)}$ for $m=1$ bits of leakage from each share, and any field size $p(n)$. Then, it must be the case that $k=\Omega(n/\log(n))$.
+\end{theorem}
+
+In a somewhat different direction, we observe regarding natural hurdles to proving the result for $\codedim < n/2$ using Fourier analytic techniques used in the LSS papers so far (including the current results). 
+Consider an approach where we bound the Fourier coefficients using only their absolute values and rely on the Parseval's identity. 
+Then, such approaches shall fail in meaningfully bounding the distinguishing advantage. 
+We provide a (hypothetical) Fourier spectrum that is transparent to the class of techniques used in the line of work.
+In this example, the upper-bound for the distinguishing advantage diverges (to infinity) with the field size $p$. This indicates that additional properties of the Fourier spectrum of boolean functions should be used to improve the upper bounds, if at all.
+
+
+%%%
+\section {Prior Works}
+\label{sec:prior} 
+%\mw{There is a very recent survey by Kalai and Reyzin \url{https://eprint.iacr.org/2019/302.pdf}. Some references there might be helpful.}
+%\TODO{Maji: good find. It read it recently.}
+
+Leakage-resilience has been a major topic in cryptography and there is a vast  literature in this line of work (to name a few,  \cite{Kocher96,GolOst96,KocJafJun99,IshSahWag03,MicRey04,Dziembowski06,DodKalLov09}). Below, we only discuss those works that are closely related to this work.
+
+In the field of code repairing, Guruswami and Wootters~\cite{GurWoo16} showed that, for fields of characteristic 2, it might be possible to recover the secret by learning one-bit information from each share. 
+Inspired by their work, Benhamouda, Degwekar, Ishai, and Rabin~\cite{C:BDIR18} initiated the study of leakage resilience of linear secret sharing schemes over a prime order field. 
+Subsequently, Nielsen and Simkin~\cite{NS20} studied the upper bound on the amount of leakage. In particular, for $(n,t)$-Shamir-secret sharing, they showed that the amount of leakage from each share cannot exceed $\frac{t\log n}{n-t}$. 
+
+Recently, there also have been many works~\cite{GoyKum18,BadSri19,KumMekSah19,SriVas19,ADNOPRS19} trying to construct compilers that strengthen existing secret-sharing schemes with various guarantees of leakage-resilience.
+
+
+%In figure \ref{fig:mesh1} one can see a blue circle with a letter $e$ in it.
+%\begin{figure}
+% \centering
+   % \includegraphics[width=0.25\textwidth]{Figures/Ariel1.png}
+%   \includegraphics[width=0.5\textwidth]{Figures/Electron.pdf}
+%    \caption{a nice plot}
+%    \label{fig:mesh1}
+%\end{figure}

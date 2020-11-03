@@ -1,0 +1,614 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Masters/Doctoral Thesis 
+% LaTeX Template
+% Version 2.4 (22/11/16)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Version 2.x major modifications by:
+% Vel (vel@latextemplates.com)
+%
+% This template is based on a template by:
+% Steve Gunn (http://users.ecs.soton.ac.uk/srg/softwaretools/document/templates/)
+% Sunil Patel (http://www.sunilpatel.co.uk/thesis-template/)
+%
+% Template license:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[
+11pt, % The default document font size, options: 10pt, 11pt, 12pt
+oneside, % Two side (alternating margins) for binding by default, uncomment to switch to one side
+english, % ngerman for German
+singlespacing, % Single line spacing, alternatives: onehalfspacing or doublespacing
+% for thesis review - use doublespacing, for final version use singlespacing
+%draft, % Uncomment to enable draft mode (no pictures, no links, overfull hboxes indicated)
+%nolistspacing, % If the document is onehalfspacing or doublespacing, uncomment this to set spacing in lists to single
+%liststotoc, % Uncomment to add the list of figures/tables/etc to the table of contents
+%toctotoc, % Uncomment to add the main table of contents to the table of contents
+%parskip, % Uncomment to add space between paragraphs
+%nohyperref, % Uncomment to not load the hyperref package
+headsepline, % Uncomment to get a line under the header
+%chapterinoneline, % Uncomment to place the chapter title next to the number on one line
+%consistentlayout, % Uncomment to change the layout of the declaration, abstract and acknowledgements pages to match the default layout
+]{MastersDoctoralThesis} % The class file specifying the document structure
+
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{boxedminipage} 
+\usepackage{xspace} 
+%\usepackage{wrapfig}
+\usepackage{mleftright} 
+\usepackage{xcolor} 
+\usepackage{soul} 
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath} 
+\usepackage{enumitem}
+\usepackage{bbm}
+%\usepackage{geometry}
+
+
+\usepackage{palatino} % Use the Palatino font by default
+%\usepackage[backend=bibtex,style=numeric,citestyle=numeric,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
+\usepackage[backend=bibtex,style=alphabetic,citestyle=alphabetic,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
+
+\addbibresource{Reference.bib} % The filename of the bibliography
+
+\usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
+
+%----------------------------------------------------------------------------------------
+%	MARGIN SETTINGS
+%----------------------------------------------------------------------------------------
+
+%Theorem
+\newtheorem{theorem}{Theorem}[section]
+\geometry{
+	paper=a4paper, % Change to letterpaper for US letter
+	inner=2.5cm, % Inner margin
+	outer=3.8cm, % Outer margin
+	bindingoffset=.5cm, % Binding offset
+	top=1.5cm, % Top margin
+	bottom=1.5cm, % Bottom margin
+	%showframe, % Uncomment to show how the type block is set on the page
+}
+
+%Claim
+\newtheorem{claim}{Claim}[section]
+\geometry{
+	paper=a4paper, % Change to letterpaper for US letter
+	inner=2.5cm, % Inner margin
+	outer=3.8cm, % Outer margin
+	bindingoffset=.5cm, % Binding offset
+	top=1.5cm, % Top margin
+	bottom=1.5cm, % Bottom margin
+	%showframe, % Uncomment to show how the type block is set on the page
+}
+
+%Lemma
+\newtheorem{lemma}{Lemma}[section]
+\geometry{
+	paper=a4paper, % Change to letterpaper for US letter
+	inner=2.5cm, % Inner margin
+	outer=3.8cm, % Outer margin
+	bindingoffset=.5cm, % Binding offset
+	top=1.5cm, % Top margin
+	bottom=1.5cm, % Bottom margin
+	%showframe, % Uncomment to show how the type block is set on the page
+}
+
+%Remark
+\newtheorem{remark}{Remark}[section]
+\geometry{
+	paper=a4paper, % Change to letterpaper for US letter
+	inner=2.5cm, % Inner margin
+	outer=3.8cm, % Outer margin
+	bindingoffset=.5cm, % Binding offset
+	top=1.5cm, % Top margin
+	bottom=1.5cm, % Bottom margin
+	%showframe, % Uncomment to show how the type block is set on the page
+}
+
+%Observation
+\newtheorem{observation}{Observation}[section]
+\geometry{
+	paper=a4paper, % Change to letterpaper for US letter
+	inner=2.5cm, % Inner margin
+	outer=3.8cm, % Outer margin
+	bindingoffset=.5cm, % Binding offset
+	top=1.5cm, % Top margin
+	bottom=1.5cm, % Bottom margin
+	%showframe, % Uncomment to show how the type block is set on the page
+}
+
+%corollary
+\newtheorem{corollary}{Corollary}[section]
+\geometry{
+	paper=a4paper, % Change to letterpaper for US letter
+	inner=2.5cm, % Inner margin
+	outer=3.8cm, % Outer margin
+	bindingoffset=.5cm, % Binding offset
+	top=1.5cm, % Top margin
+	bottom=1.5cm, % Bottom margin
+	%showframe, % Uncomment to show how the type block is set on the page
+}
+
+
+%\newenvironment{claim}[1]{\par\noindent\underline{Claim:}\space#1}{}
+
+%%% Marking - macro
+%\newcommand\typo[1]{{\textcolor{blue}{ Typo: {#1}}}\xspace}
+\newcommand{\TODO}[1]{{\textcolor{red}{ TODO: {#1}}}\xspace}
+\newcommand{\nanat}[1]{{\textcolor{red}{ [Anat's note: {#1}] }}\xspace}
+\newcommand{\ntom}[1]{{\textcolor{red}{ [Tom's note: {#1}] }}\xspace}
+
+
+%\newtheorem{theorem}{Theorem}
+
+
+\newcommand{\codedim}{k}
+\newcommand{\dualcodedim}{k^\bot}
+\newcommand{\codedist}{d}
+\newcommand{\secret}{s}
+\newcommand{\shareVec}[1]{\mathbf{sh_{#1}}}
+\newcommand{\shareSubVec}[2]{sh_{#1}^{#2}}
+\newcommand{\generateMatrix}{G}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
+\newcommand{\BadNoZero}[2]{\textnormal{BadNon0}_{#1,#2}}
+\newcommand{\GoodNoZero}[2]{\textnormal{GoodNon0}_{#1,#2}}
+\newcommand{\Bad}[2]{\textnormal{Bad}_{#1,#2}}
+\newcommand{\SBig}[2]{\textnormal{Big}_{#1,#2}}
+
+
+\newcommand{\Ent}[1]{\mathbf{I}({#1})}
+\newcommand{\rowspan}[1]{\mathbf{rowspan}(#1)}
+
+\newcommand{\myvec}[1]{\mathbf{#1}}
+\newcommand{\Leak}[2]{\mathrm{Leak}_{#1}(#2)}
+\newcommand{\freeind}[4]{\mathrm{free} \left( #1;#2,#3,#4 \right) }
+\newcommand{\freei}{\mathrm{free_i}}
+\newcommand{\freeione}{\mathrm{free_1}}
+\newcommand{\freeitwo}{\mathrm{free_2}}
+
+
+\newcommand{\myvec}[1]{\mathbf{#1}}
+\newcommand{\Leak}[2]{\mathrm{Leak}_{#1}(#2)}
+\newcommand{\freeind}[4]{\mathrm{free} \left( #1;#2,#3,#4 \right) }
+\newcommand{\freei}{\mathrm{free_i}}
+\newcommand{\freeione}{\mathrm{free_1}}
+\newcommand{\freeitwo}{\mathrm{free_2}}
+%\renewcommand{\SD}[2]{\mathrm{SD}(#1,#2)}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Ent}[1]{\mathbf{I}({#1})}
+\newcommand{\rowspan}[1]{\mathbf{rowspan}(#1)}
+%\newcommand{\code}[3]{[#1,#2,#3]\text{-code}}
+\newcommand{\mdscode}[3]{[#1,#2,#3]\text{-MDS}}
+%\newcommand{\BadI}[2]{\text{Bad}_{#1,#2}}
+%\newcommand{\Bad}[2]{\text{Bad}_{#1,#2}}
+%\newcommand{\Good}[2]{\text{Good}_{#1,#2}}
+\newcommand{\codedim}{k}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
+
+%%% Common commands
+\newcommand{\pred}[1]{\ensuremath{\mathsf{#1}}\xspace}
+\newcommand{\SD}[2]{\ensuremath{\pred{SD} \left({#1},{#2} \right)}\xspace}
+\newcommand{\Enc}{\mathsf{Enc}}
+\newcommand{\Dec}{\mathsf{Dec}}
+\newcommand{\Ext}{\mathsf{Ext}}
+\newcommand{\zo}{\ensuremath{{\{0,1\}}}\xspace}
+\newcommand{\defeq}[0]{\ensuremath{{\;\vcentcolon=\;}}\xspace}
+\newcommand{\drawn}{\ensuremath{\xleftarrow{\$}}\xspace}
+\newcommand{\wt}{\ensuremath{\mathsf{wt}}\xspace}
+\newcommand{\hd}{\ensuremath{\mathsf{HD}}\xspace}
+\newcommand{\draw}{\leftarrow}
+\newcommand{\eps}{\epsilon}
+
+
+
+\newcommand{\ie}{i.e.}
+
+
+\newcommand{\ip}[1]{\langle#1\rangle}
+
+%% Black-board Alphabets 
+\newcommand{\A}{\mathbb{A}\xspace}
+\newcommand{\B}{\mathbb{B}\xspace}
+\newcommand{\C}{\mathbb{C}\xspace}
+\newcommand{\D}{\mathbb{D}\xspace}
+\newcommand{\E}{\mathbb{E}\xspace}
+\newcommand{\F}{\mathbb{F}\xspace}
+\newcommand{\G}{\mathbb{G}\xspace}
+\newcommand{\H}{\mathbb{H}\xspace}
+\newcommand{\I}{\mathbb{I}\xspace}
+\newcommand{\J}{\mathbb{J}\xspace}
+\newcommand{\K}{\mathbb{K}\xspace}
+\newcommand{\L}{\mathbb{L}\xspace}
+\newcommand{\M}{\mathbb{M}\xspace}
+\newcommand{\N}{\mathbb{N}\xspace}
+\newcommand{\O}{\mathbb{O}\xspace}
+\newcommand{\P}{\mathbb{P}\xspace}
+\newcommand{\Q}{\mathbb{Q}\xspace}
+\newcommand{\R}{\mathbb{R}\xspace}
+\newcommand{\S}{\mathbb{S}\xspace}
+\newcommand{\T}{\mathbb{T}\xspace}
+\newcommand{\U}{\mathbb{U}\xspace}
+\newcommand{\V}{\mathbb{V}\xspace}
+\newcommand{\W}{\mathbb{W}\xspace}
+\newcommand{\X}{\mathbb{X}\xspace}
+\newcommand{\Y}{\mathbb{Y}\xspace}
+\newcommand{\Z}{\mathbb{Z}\xspace}
+
+
+
+%% Cal Alphabets
+\newcommand{\cA}{\ensuremath{{\mathcal A}}\xspace}
+\newcommand{\cB}{\ensuremath{{\mathcal B}}\xspace}
+\newcommand{\cC}{\ensuremath{{\mathcal C}}\xspace}
+\newcommand{\cD}{\ensuremath{{\mathcal D}}\xspace}
+\newcommand{\cE}{\ensuremath{{\mathcal E}}\xspace}
+\newcommand{\cF}{\ensuremath{{\mathcal F}}\xspace}
+\newcommand{\cG}{\ensuremath{{\mathcal G}}\xspace}
+\newcommand{\cH}{\ensuremath{{\mathcal H}}\xspace}
+\newcommand{\cI}{\ensuremath{{\mathcal I}}\xspace}
+\newcommand{\cJ}{\ensuremath{{\mathcal J}}\xspace}
+\newcommand{\cK}{\ensuremath{{\mathcal K}}\xspace}
+\newcommand{\cL}{\ensuremath{{\mathcal L}}\xspace}
+\newcommand{\cM}{\ensuremath{{\mathcal M}}\xspace}
+\newcommand{\cN}{\ensuremath{{\mathcal N}}\xspace}
+\newcommand{\cO}{\ensuremath{{\mathcal O}}\xspace}
+\newcommand{\cP}{\ensuremath{{\mathcal P}}\xspace}
+\newcommand{\cQ}{\ensuremath{{\mathcal Q}}\xspace}
+\newcommand{\cR}{\ensuremath{{\mathcal R}}\xspace}
+\newcommand{\cS}{\ensuremath{{\mathcal S}}\xspace}
+\newcommand{\cT}{\ensuremath{{\mathcal T}}\xspace}
+\newcommand{\cU}{\ensuremath{{\mathcal U}}\xspace}
+\newcommand{\cV}{\ensuremath{{\mathcal V}}\xspace}
+\newcommand{\cW}{\ensuremath{{\mathcal W}}\xspace}
+\newcommand{\cX}{\ensuremath{{\mathcal X}}\xspace}
+\newcommand{\cY}{\ensuremath{{\mathcal Y}}\xspace}
+\newcommand{\cZ}{\ensuremath{{\mathcal Z}}\xspace}
+
+
+%% Bold Alphabets
+\newcommand{\bA}{\ensuremath{{\mathbf A}}\xspace}
+\newcommand{\bB}{\ensuremath{{\mathbf B}}\xspace}
+\newcommand{\bC}{\ensuremath{{\mathbf C}}\xspace}
+\newcommand{\bD}{\ensuremath{{\mathbf D}}\xspace}
+\newcommand{\bE}{\ensuremath{{\mathbf E}}\xspace}
+\newcommand{\bF}{\ensuremath{{\mathbf F}}\xspace}
+\newcommand{\bG}{\ensuremath{{\mathbf G}}\xspace}
+\newcommand{\bH}{\ensuremath{{\mathbf H}}\xspace}
+\newcommand{\bI}{\ensuremath{{\mathbf I}}\xspace}
+\newcommand{\bJ}{\ensuremath{{\mathbf J}}\xspace}
+\newcommand{\bK}{\ensuremath{{\mathbf K}}\xspace}
+\newcommand{\bL}{\ensuremath{{\mathbf L}}\xspace}
+\newcommand{\bM}{\ensuremath{{\mathbf M}}\xspace}
+\newcommand{\bN}{\ensuremath{{\mathbf N}}\xspace}
+\newcommand{\bO}{\ensuremath{{\mathbf O}}\xspace}
+\newcommand{\bP}{\ensuremath{{\mathbf P}}\xspace}
+\newcommand{\bQ}{\ensuremath{{\mathbf Q}}\xspace}
+\newcommand{\bR}{\ensuremath{{\mathbf R}}\xspace}
+\newcommand{\bS}{\ensuremath{{\mathbf S}}\xspace}
+\newcommand{\bT}{\ensuremath{{\mathbf T}}\xspace}
+\newcommand{\bU}{\ensuremath{{\mathbf U}}\xspace}
+\newcommand{\bV}{\ensuremath{{\mathbf V}}\xspace}
+\newcommand{\bW}{\ensuremath{{\mathbf W}}\xspace}
+\newcommand{\bX}{\ensuremath{{\mathbf X}}\xspace}
+\newcommand{\bY}{\ensuremath{{\mathbf Y}}\xspace}
+\newcommand{\bZ}{\ensuremath{{\mathbf Z}}\xspace}
+
+
+%% Black-board Bold Alphabets
+\newcommand{\bbA}{\ensuremath{{\mathbb A}}\xspace}
+\newcommand{\bbB}{\ensuremath{{\mathbb B}}\xspace}
+\newcommand{\bbC}{\ensuremath{{\mathbb C}}\xspace}
+\newcommand{\bbD}{\ensuremath{{\mathbb D}}\xspace}
+\newcommand{\bbE}{\ensuremath{{\mathbb E}}\xspace}
+\newcommand{\bbF}{\ensuremath{{\mathbb F}}\xspace}
+
+\newcommand{\bbG}{\ensuremath{{\mathbb G}}\xspace}
+\newcommand{\bbH}{\ensuremath{{\mathbb H}}\xspace}
+\newcommand{\bbI}{\ensuremath{{\mathbb I}}\xspace}
+\newcommand{\bbJ}{\ensuremath{{\mathbb J}}\xspace}
+\newcommand{\bbK}{\ensuremath{{\mathbb K}}\xspace}
+\newcommand{\bbL}{\ensuremath{{\mathbb L}}\xspace}
+\newcommand{\bbM}{\ensuremath{{\mathbb M}}\xspace}
+\newcommand{\bbN}{\ensuremath{{\mathbb N}}\xspace}
+\newcommand{\bbO}{\ensuremath{{\mathbb O}}\xspace}
+\newcommand{\bbP}{\ensuremath{{\mathbb P}}\xspace}
+\newcommand{\bbQ}{\ensuremath{{\mathbb Q}}\xspace}
+\newcommand{\bbR}{\ensuremath{{\mathbb R}}\xspace}
+\newcommand{\bbS}{\ensuremath{{\mathbb S}}\xspace}
+\newcommand{\bbT}{\ensuremath{{\mathbb T}}\xspace}
+\newcommand{\bbU}{\ensuremath{{\mathbb U}}\xspace}
+\newcommand{\bbV}{\ensuremath{{\mathbb V}}\xspace}
+\newcommand{\bbW}{\ensuremath{{\mathbb W}}\xspace}
+\newcommand{\bbX}{\ensuremath{{\mathbb X}}\xspace}
+\newcommand{\bbY}{\ensuremath{{\mathbb Y}}\xspace}
+\newcommand{\bbZ}{\ensuremath{{\mathbb Z}}\xspace}
+
+
+
+%----------------------------------------------------------------------------------------
+%	THESIS INFORMATION
+%----------------------------------------------------------------------------------------
+
+\thesistitle{Leakage-resilient Secret Sharing} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
+\supervisor{Dr. Anat Paskin-Cherniavsky} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
+\examiner{} % Your examiner's name, this is not currently used anywhere in the template, print it elsewhere with \examname
+\degree{Master} % Your degree name, this is used in the title page and abstract, print it elsewhere with \degreename
+\author{Tom Suad} % Your name, this is used in the title page and abstract, print it elsewhere with \authorname
+\addresses{} % Your address, this is not currently used anywhere in the template, print it elsewhere with \addressname
+
+\subject{Computer Science} % Your subject area, this is not currently used anywhere in the template, print it elsewhere with \subjectname
+\keywords{Keyword1, Keyword2, Keyword3} % Keywords for your thesis, this is not currently used anywhere in the template, print it elsewhere with \keywordnames
+\university{\href{http://www.university.com}{Ariel University}} % Your university's name and URL, this is used in the title page and abstract, print it elsewhere with \univname
+\department{\href{http://department.university.com}{Department of Computer Science}} % Your department's name and URL, this is used in the title page and abstract, print it elsewhere with \deptname
+\group{\href{http://researchgroup.university.com}{ }} % Your research group's name and URL, this is used in the title page, print it elsewhere with \groupname
+\faculty{\href{http://faculty.university.com}{Faculty of Natural Sciences}} % Your faculty's name and URL, this is used in the title page and abstract, print it elsewhere with \facname
+
+\AtBeginDocument{
+\hypersetup{pdftitle=\ttitle} % Set the PDF's title to your title
+\hypersetup{pdfauthor=\authorname} % Set the PDF's author to your name
+\hypersetup{pdfkeywords=\keywordnames} % Set the PDF's keywords to your keywords
+}
+
+\begin{document}
+
+\frontmatter % Use roman page numbering style (i, ii, iii, iv...) for the pre-content pages
+
+\pagestyle{plain} % Default to the plain heading style until the thesis style is called for the body content
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\begin{titlepage}
+\begin{center}
+
+\vspace*{.06\textheight}
+{\scshape\LARGE \univname\par}\vspace{1.5cm} % University name
+\textsc{\Large Master Thesis}\\[0.5cm] % Thesis type
+
+\HRule \\[0.4cm] % Horizontal line
+{\huge \bfseries \ttitle\par}\vspace{0.4cm} % Thesis title
+\HRule \\[1.5cm] % Horizontal line
+ 
+\begin{minipage}[t]{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Author:}\\
+\authorname
+%\href{http://www.johnsmith.com}{\authorname} % Author name - remove the \href bracket to remove the link
+\end{flushleft}
+\end{minipage}
+\begin{minipage}[t]{0.4\textwidth}
+\begin{flushright} \large
+\emph{Supervisor:} \\
+\supname %\href{http://www.jamessmith.com}{\supname} % Supervisor name - remove the \href bracket to remove the link  
+\end{flushright}
+\end{minipage}\\[3cm]
+ 
+\vfill
+%\large \textit{A thesis submitted in partial fulfillment of the requirements\\ for the degree of \degreename}\\[0.3cm] % University requirement text
+%\textit{in the}\\[0.4cm]
+\groupname\\\deptname\\[2cm] % Research group name and department name
+ 
+\vfill
+
+{\large \today}\\[4cm] % Date
+\includegraphics[width=50mm]{Figures/Ariel1.png} % University/department logo - uncomment to place it
+ 
+\vfill
+\end{center}
+\end{titlepage}
+
+%----------------------------------------------------------------------------------------
+%	DECLARATION PAGE
+%----------------------------------------------------------------------------------------
+
+\begin{declaration}
+\addchaptertocentry{\authorshipname} % Add the declaration to the table of contents
+\noindent I, \authorname, hereby declare that this thesis entitled, \enquote{\ttitle} and the work presented in it are my own. I confirm that:
+
+\begin{itemize} 
+\item This work was done wholly or mainly while in candidature for a research degree at this University.
+\item Where any part of this thesis has previously been submitted for a degree or any other qualification at this University or any other institution, this has been clearly stated.
+\item Where I have consulted the published work of others, this is always clearly attributed.
+\item Where I have quoted from the work of others, the source is always given. With the exception of such quotations, this thesis is entirely my own work.
+\item I have acknowledged all main sources of help.
+\item Where the thesis is based on work done by myself jointly with others, I have made clear exactly what was done by others and what I have contributed myself.\\
+\end{itemize}
+ 
+\noindent Signed:\\
+\rule[0.5em]{25em}{0.5pt} % This prints a line for the signature
+ 
+\noindent Date:\\
+\rule[0.5em]{25em}{0.5pt} % This prints a line to write the date
+\end{declaration}
+
+%\cleardoublepage
+
+%----------------------------------------------------------------------------------------
+%	QUOTATION PAGE
+%----------------------------------------------------------------------------------------
+
+%\vspace*{0.2\textheight}
+
+%\noindent\enquote{\itshape Thanks to my solid academic training, today I can write hundreds of words on virtually any topic without possessing a shred of information, which is how I got a good job in journalism.}\bigbreak
+
+%\hfill Dave Barry
+
+%----------------------------------------------------------------------------------------
+%	DEDICATION
+%----------------------------------------------------------------------------------------
+
+\dedicatory{Dedicated to my loving parents Ofer and Sigalit Suad, for their continuous and unparalleled love, help and support. And my sister Ziv, for always being there for me as a friend.} 
+
+%----------------------------------------------------------------------------------------
+%	ACKNOWLEDGEMENTS
+%----------------------------------------------------------------------------------------
+
+\begin{acknowledgements}
+\addchaptertocentry{\acknowledgementname} % Add the acknowledgements to the table of contents
+
+I would like to thank Ariel University and Ariel Cyber Innovation Center for the fellowship which support me while conducting my research.
+
+I also would like to thank my supervisor, who assisted and guided me throughout this research and the degree work: Dr. Anat Paskin-Cherniavsky. 
+
+Finally, I would also like to thank my family for their amazing support throughout the years and the degrees, without you these accomplishments would never have come to fruition.
+
+
+
+
+\end{acknowledgements}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	LIST OF CONTENTS/FIGURES/TABLES PAGES
+%----------------------------------------------------------------------------------------
+
+\tableofcontents % Prints the main table of contents
+%\listoffigures % Prints the list of figures
+%\listoftables % Prints the list of tables
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT PAGE
+%----------------------------------------------------------------------------------------
+
+\begin{abstract}
+\addchaptertocentry{\abstractname} % Add the abstract to the table of contents
+% \include{Chapters/abstract}
+The security of cryptographic primitives typically relies on the storage of private secrets by each participant in a perfect manner. 
+However, increasingly, side-channel attacks are demonstrating the pitfalls of assuming these cryptographic entities as opaque monolithic objects over the entire duration the primitive remains alive. 
+Motivated by such concerns, there is a significant interest in revisiting well-established cryptographic primitives and their implementations to identify whether their security continues to hold in the presence of such side-channel attacks. 
+
+%Fundamental primitives, like secret-sharing schemes when performed over carelessly chosen finite fields lead to devastating security breaches. 
+%For example, linear secret sharing schemes over characteristic 2 fields are susceptible to an adversary who performs only one-bit leakage from the shares of all the parties. 
+Although there are compilers to convert any secret sharing scheme into one that is robust to local leakage on each of their shares, it is not feasible to replace every instance of traditional secret sharing schemes in use with a leakage-resilient counterpart. 
+Beyond efficiency considerations, there may be an appropriate structure in specific secret-sharing schemes that are fundamental to their usage in a particular context.
+%Let alone efficiency considerations, there is a lot of structure in certain secret-sharing schemes that are fundamental to their usage in certain context. 
+%For example, the multiplication friendly nature of Reed-Solomon or Algebraic Geometry codes is inherent to their use in secure computation protocols. 
+For example, the use of a linear secret sharing scheme helps perform secure aggregation of statistics in parallel (for example, the sum of the private inputs of the participants) even in the presence of malicious parties. 
+The reconstruction threshold of these secret sharing schemes determines the threshold of corruption permissible in the secure computation protocol; lower reconstruction threshold implies a higher efficiency. 
+
+This paper makes a two-fold contribution. First, we continue the study the local leakage resilience of Reed-Solomon codes as initiated by Benhamouda, Degwekar, Ishai, and Rabin (2018). 
+We improve their lower bound on the reconstruction threshold for Reed Solomon codes from $0.907n$ to $0.867n$ for one-bit leakage from each secret share,  where $n$ represents the number of parties receiving the secret shares. 
+
+Next, we explore whether, in the presence of local leakage, there is something inherent to maximum-distance separable (MDS) codes (Reed Solomon code is a particular example from this class of codes) that innately demands high reconstruction thresholds. 
+Towards this investigation, we study random MDS codes and their necessary reconstruction threshold to remain resilient to a constant local leakage from each share. 
+Given any $\delta\in(0,1/2),$ we prove that most random MDS codes over suitably large fields with reconstruction threshold $(1/2 + \delta)n$ are resilient to constant local leakage.
+
+In terms of techniques, both results rely on a Fourier-analytic approach to this problem. 
+In particular, the second result relies on new and subtle analysis techniques for random MDS codes, which we believe shall be of independent interest. 
+
+Finally, we also contribute to the impossibility of designing secret-sharing schemes based on MDS codes over prime-order fields, where the dimension of the code is very small. 
+If one insists on exponentially small indistinguishability among the shares generated by two different secrets, then the dimension of the code needs to be $\Omega(n/\log n)$, even when the adversary obtains only $m=1$ bit leakage from each of the shares and the field size is arbitrarily large. 
+
+
+\end{abstract}
+
+
+%----------------------------------------------------------------------------------------
+%	ABBREVIATIONS
+%----------------------------------------------------------------------------------------
+
+\begin{abbreviations}{ll} % Include a list of abbreviations (a table of two columns)
+
+\textbf{MPC} & \textbf{M}ulti-\textbf{P}arty \textbf{C}omputation\\
+\textbf{SSS} & \textbf{S}ecret \textbf{S}haring \textbf{S}cheme\\
+\textbf{LSSS} & \textbf{L}eakage-resilient \textbf{S}ecret \textbf{S}haring \textbf{S}cheme\\
+\textbf{MDS} & \textbf{M}aximum \textbf{D}istance \textbf{S}eparable\\
+\textbf{ECC} & \textbf{E}rror-\textbf{C}orrecting \textbf{C}ode\\
+
+\end{abbreviations}
+
+%----------------------------------------------------------------------------------------
+%	PHYSICAL CONSTANTS/OTHER DEFINITIONS
+%----------------------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+%	SYMBOLS
+%----------------------------------------------------------------------------------------
+
+\begin{symbols}{lll} % Include a list of Symbols (a three column table)
+
+$\codedim$ & Dimension of ECC \\
+$\codedist$ & Distance of ECC \\
+$C$ & Random MDS code \\
+$C^\bot$ & Dual code of $C$ \\ \\
+$\secret$ & Secret \\
+$\shareVec$ & Sequence of shares \\
+$n$ & Number of parties \\
+$t$ & Threshold of the SSS \\ \\
+$\F$ & Field \\
+$p$ & Prime number \\
+$\F_p$ & Field of order $p$ \\ \\
+$\bbC$ & Complex numbers \\ 
+
+\end{symbols}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	THESIS CONTENT - CHAPTERS
+%----------------------------------------------------------------------------------------
+
+\mainmatter % Begin numeric (1,2,3...) page numbering
+
+\pagestyle{thesis} % Return the page headers back to the "thesis" style
+
+% Include the chapters of the thesis as separate files from the Chapters folder
+% Uncomment the lines as you write the chapters
+% Introduction
+\include{Chapters/introduction}
+
+% Preliminaries
+\include{Chapters/Preliminaries}
+
+% Improved result for Shamir Secret Sharing and m=1
+\include{Chapters/ShamirSecretSharing}
+
+% A result for random MDS code over a large fields
+\include{Chapters/RandomMDS}
+
+% Lower bounds
+\include{Chapters/LowerBounds}
+
+
+%----------------------------------------------------------------------------------------
+%	THESIS CONTENT - APPENDICES
+%----------------------------------------------------------------------------------------
+
+\appendix % Cue to tell LaTeX that the following "chapters" are Appendices
+
+% Include the appendices of the thesis as separate files from the Appendices folder
+% Uncomment the lines as you write the Appendices
+
+\include{Appendices/Appendix}
+
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%-----------------------------------------------------------------------
+\printbibliography[heading=bibintoc]
+
+%----------------------------------------------------------------------------------------
+
+\end{document}  

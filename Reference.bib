@@ -1,0 +1,335 @@
+%@article{ben2007constant,
+%  title={A constant-factor approximation algorithm for optimal 1.5 D terrain guarding},
+%  author={Ben-Moshe, Boaz and Katz, Matthew J and Mitchell, Joseph SB},
+%  journal={SIAM Journal on Computing},
+%  volume={36},
+%  number={6},
+%  pages={1631--1647},
+%  year={2007},
+%  publisher={SIAM}
+%}
+
+
+
+%Ref [Ben+18]
+@inproceedings{C:BDIR18,
+  title={On the local leakage resilience of linear secret sharing schemes},
+  author={Benhamouda, Fabrice and Degwekar, Akshay and Ishai, Yuval and Rabin, Tal},
+  booktitle={Annual International Cryptology Conference},
+  pages={531--561},
+  year={2018},
+  organization={Springer}
+}
+
+
+%Ref [Ben+19]
+@misc{EPRINT:BDIR19,
+    author = {Fabrice Benhamouda and Akshay Degwekar and Yuval Ishai and Tal Rabin},
+    title = {On the Local Leakage Resilience of Linear Secret Sharing Schemes},
+    howpublished = {Cryptology ePrint Archive, Report 2019/653},
+    year = {2019},
+    note = {\url{https://eprint.iacr.org/2019/653}},
+}
+
+
+%Ref [Hal+08]
+@inproceedings{USENIX:HSH+08,
+  author    = {J. Alex Halderman and
+               Seth D. Schoen and
+               Nadia Heninger and
+               William Clarkson and
+               William Paul and
+               Joseph A. Calandrino and
+               Ariel J. Feldman and
+               Jacob Appelbaum and
+               Edward W. Felten},
+  title     = {Lest We Remember: Cold Boot Attacks on Encryption Keys},
+  booktitle = {Proceedings of the 17th {USENIX} Security Symposium, July 28-August
+               1, 2008, San Jose, CA, {USA}},
+  pages     = {45--60},
+  year      = {2008}
+}
+
+
+
+
+%Ref [Mas01]
+@article{Mas95,
+  title={Some applications of code duality in cryptography},
+  author={Massey, James L},
+  journal={Mat. Contemp},
+  volume={21},
+  number={187-209},
+  pages={16th},
+  year={2001}
+}
+
+
+%Ref [NS20]
+@inproceedings{NS20,
+  author    = {Jesper Buus Nielsen and
+               Mark Simkin},
+  editor    = {Anne Canteaut and
+               Yuval Ishai},
+  title     = {Lower Bounds for Leakage-Resilient Secret Sharing},
+  booktitle = {Advances in Cryptology - {EUROCRYPT} 2020 - 39th Annual International
+               Conference on the Theory and Applications of Cryptographic Techniques,
+               Zagreb, Croatia, May 10-14, 2020, Proceedings, Part {I}},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {12105},
+  pages     = {556--577},
+  publisher = {Springer},
+  year      = {2020},
+  url       = {https://doi.org/10.1007/978-3-030-45721-1\_20},
+  doi       = {10.1007/978-3-030-45721-1\_20},
+  timestamp = {Mon, 04 May 2020 14:30:29 +0200},
+  biburl    = {https://dblp.org/rec/conf/eurocrypt/Nielsen020.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+
+
+%Ref [Koc96]
+@InProceedings{Kocher96,
+author="Kocher, Paul C.",
+editor="Koblitz, Neal",
+title="Timing Attacks on Implementations of Diffie-Hellman, RSA, DSS, and Other Systems",
+booktitle="Advances in Cryptology --- CRYPTO '96",
+year="1996",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="104--113",
+abstract="By carefully measuring the amount of time required to perform private key operations, attackers may be able to find fixed Diffie-Hellman exponents, factor RSA keys, and break other cryptosystems. Against a vulnerable system, the attack is computationally inexpensive and often requires only known ciphertext. Actual systems are potentially at risk, including cryptographic tokens, network-based cryptosystems, and other applications where attackers can make reasonably accurate timing measurements. Techniques for preventing the attack for RSA and Diffie-Hellman are presented. Some cryptosystems will need to be revised to protect against the attack, and new protocols and algorithms may need to incorporate measures to prevent timing attacks.",
+isbn="978-3-540-68697-2"
+}
+
+
+%Ref [GO96]
+@article{GolOst96,
+  author    = {Oded Goldreich and
+               Rafail Ostrovsky},
+  journal   = {J. {ACM}},
+  volume    = {43},
+  number    = {3},
+  pages     = {431--473},
+  year      = {1996}
+}
+
+
+%Ref [KJJ99]
+@InProceedings{KocJafJun99,
+author="Kocher, Paul
+and Jaffe, Joshua
+and Jun, Benjamin",
+editor="Wiener, Michael",
+title="Differential Power Analysis",
+booktitle="Advances in Cryptology --- CRYPTO' 99",
+year="1999",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="388--397",
+%abstract="Cryptosystem designers frequently assume that secrets will be manipulated in closed, reliable computing environments. Unfortunately, actual computers and microchips leak information about the operations they process. This paper examines specific methods for analyzing power consumption measurements to find secret keys from tamper resistant devices. We also discuss approaches for building cryptosystems that can operate securely in existing hardware that leaks information.",
+isbn="978-3-540-48405-9"
+}
+
+
+%Ref [ISW03]
+@InProceedings{IshSahWag03,
+author="Ishai, Yuval
+and Sahai, Amit
+and Wagner, David",
+editor="Boneh, Dan",
+title="Private Circuits: Securing Hardware against Probing Attacks",
+booktitle="Advances in Cryptology - CRYPTO 2003",
+year="2003",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="463--481",
+%abstract="Can you guarantee secrecy even if an adversary can eavesdrop on your brain? We consider the problem of protecting privacy in circuits, when faced with an adversary that can access a bounded number of wires in the circuit. This question is motivated by side channel attacks, which allow an adversary to gain partial access to the inner workings of hardware. Recent work has shown that side channel attacks pose a serious threat to cryptosystems implemented in embedded devices. In this paper, we develop theoretical foundations for security against side channels. In particular, we propose several efficient techniques for building private circuits resisting this type of attacks. We initiate a systematic study of the complexity of such private circuits, and in contrast to most prior work in this area provide a formal threat model and give proofs of security for our constructions.",
+isbn="978-3-540-45146-4"
+}
+
+
+%Ref [MR04]
+@InProceedings{MicRey04,
+author="Micali, Silvio
+and Reyzin, Leonid",
+editor="Naor, Moni",
+title="Physically Observable Cryptography",
+booktitle="Theory of Cryptography",
+year="2004",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="278--296",
+%abstract="Complexity-theoretic cryptography considers only abstract notions of computation, and hence cannot protect against attacks that exploit the information leakage (via electromagnetic fields, power consumption, etc.) inherent in the physical execution of any cryptographic algorithm. Such ``physical observation attacks'' bypass the impressive barrier of mathematical security erected so far, and successfully break mathematically impregnable systems. The great practicality and the inherent availability of physical attacks threaten the very relevance of complexity-theoretic security.",
+isbn="978-3-540-24638-1"
+}
+
+
+%Ref [Dzi06]
+@InProceedings{Dziembowski06,
+author="Dziembowski, Stefan",
+editor="Halevi, Shai
+and Rabin, Tal",
+title="Intrusion-Resilience Via the Bounded-Storage Model",
+booktitle="Theory of Cryptography",
+year="2006",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="207--224",
+%abstract="We introduce a new method of achieving intrusion-resilience in the cryptographic protocols. More precisely we show how to preserve security of such protocols, even if a malicious program (e.g. a virus) was installed on a computer of an honest user (and it was later removed). The security of our protocols relies on the assumption that the amount of data that the adversary can transfer from the infected machine is limited (however, we allow the adversary to perform any efficient computation on user's private data, before deciding on what to transfer). We focus on two cryptographic tasks, namely: session-key generation and entity authentication. Our method is based on the results from the Bounded-Storage Model.",
+isbn="978-3-540-32732-5"
+}
+
+
+%Ref [DKL09]
+@inproceedings{DodKalLov09,
+author = {Dodis, Yevgeniy and Kalai, Yael Tauman and Lovett, Shachar},
+title = {On Cryptography with Auxiliary Input},
+year = {2009},
+isbn = {9781605585062},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/1536414.1536498},
+doi = {10.1145/1536414.1536498},
+%abstract = {We study the question of designing cryptographic schemes which are secure even if an arbitrary function f(sk) of the secret key is leaked, as long as the secret key sk is still (exponentially) hard to compute from this auxiliary input. This setting of auxiliary input is more general than the more traditional setting, which assumes that some of information about the secret key sk may be leaked, but sk still has high min-entropy left. In particular, we deal with situations where f(sk) information-theoretically determines the entire secret key sk.As our main result, we construct CPA/CCA secure symmetric encryption schemes that remain secure with exponentially hard-to-invert auxiliary input. We give several applications of such schemes. * We construct an average-case obfuscator for the class of point functions, which remains secure with exponentially hard-to-invert auxiliary input, and is reusable. * We construct a reusable and robust extractor that remains secure with exponentially hard-to-invert auxiliary input. Our results rely on a new cryptographic assumption, Learning Subspace-with-Noise (LSN), which is related to the well known Learning Parity-with-Noise (LPN) assumption.},
+booktitle = {Proceedings of the Forty-First Annual ACM Symposium on Theory of Computing},
+pages = {621–630},
+numpages = {10},
+keywords = {learning parity with noise, auxiliary information, error-correcting codes, encryption schemes, randomness extractors, code obfuscation},
+location = {Bethesda, MD, USA},
+series = {STOC '09}
+}
+
+
+%Ref [GW16]
+@inproceedings{GurWoo16,
+author = {Guruswami, Venkatesan and Wootters, Mary},
+title = {Repairing Reed-Solomon Codes},
+year = {2016},
+isbn = {9781450341325},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/2897518.2897525},
+doi = {10.1145/2897518.2897525},
+%abstract = { A fundamental fact about polynomial interpolation is that k evaluations of a degree-(k-1) polynomial f are sufficient to determine f. This is also necessary in a strong sense: given k-1 evaluations, we learn nothing about the value of f on any k'th point. In this paper, we study a variant of the polynomial interpolation problem. Instead of querying entire evaluations of f (which are elements of a large field F), we are allowed to query partial evaluations; that is, each evaluation delivers a few elements from a small subfield of F, rather than a single element from F. We show that in this model, one can do significantly better than in the traditional setting, in terms of the amount of information required to determine the missing evaluation. More precisely, we show that only O(k) bits are necessary to recover a missing evaluation. In contrast, the traditional method of looking at k evaluations requires Omega(k log(k)) bits. We also show that our result is optimal for linear methods, even up to the leading constants. Our motivation comes from the use of Reed-Solomon (RS) codes for distributed storage systems, in particular for the exact repair problem. The traditional use of RS codes in this setting is analogous to the traditional interpolation problem. Each node in a system stores an evaluation of f, and if one node fails we can recover it by reading k other nodes. However, each node is free to send less information, leading to the modified problem above. The quickly-developing field of regenerating codes has yielded several codes which take advantage of this freedom. However, these codes are not RS codes, and RS codes are still often used in practice; in 2011, Dimakis et al. asked how well RS codes could perform in this setting. Our results imply that RS codes can also take advantage of this freedom to download partial symbols. In some parameter regimes---those with small levels of sub-packetization---our scheme for RS codes outperforms all known regenerating codes. Even with a high degree of sub-packetization, our methods give non-trivial schemes, and we give an improved repair scheme for a specific (14,10)-RS code used in the Facebook Hadoop Analytics cluster. },
+booktitle = {Proceedings of the Forty-Eighth Annual ACM Symposium on Theory of Computing},
+pages = {216–226},
+numpages = {11},
+keywords = {Regenerating Codes, Reed-Solomon Codes, Exact Repair Problem},
+location = {Cambridge, MA, USA},
+series = {STOC '16}
+}
+
+
+
+%Ref [GK18]
+@inproceedings{GoyKum18,
+author = {Goyal, Vipul and Kumar, Ashutosh},
+title = {Non-Malleable Secret Sharing},
+year = {2018},
+isbn = {9781450355599},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3188745.3188872},
+doi = {10.1145/3188745.3188872},
+%abstract = {A number of works have focused on the setting where an adversary tampers with the shares of a secret sharing scheme. This includes literature on verifiable secret sharing, algebraic manipulation detection(AMD) codes, and, error correcting or detecting codes in general. In this work, we initiate a systematic study of what we call non-malleable secret sharing. Very roughly, the guarantee we seek is the following: the adversary may potentially tamper with all of the shares, and still, either the reconstruction procedure outputs the original secret, or, the original secret is “destroyed” and the reconstruction outputs a string which is completely “unrelated” to the original secret. Recent exciting work on non-malleable codes in the split-state model led to constructions which can be seen as 2-out-of-2 non-malleable secret sharing schemes. These constructions have already found a number of applications in cryptography. We investigate the natural question of constructing t-out-of-n non-malleable secret sharing schemes. Such a secret sharing scheme ensures that only a set consisting of t or more shares can reconstruct the secret, and, additionally guarantees non-malleability under an attack where potentially every share maybe tampered with. Techniques used for obtaining split-state non-malleable codes (or 2-out-of-2 non-malleable secret sharing) are (in some form) based on two-source extractors and seem not to generalize to our setting. Our first result is the construction of a t-out-of-n non-malleable secret sharing scheme against an adversary who arbitrarily tampers each of the shares independently. Our construction is unconditional and features statistical non-malleability. As our main technical result, we present t-out-of-n non-malleable secret sharing scheme in a stronger adversarial model where an adversary may jointly tamper multiple shares. Our construction is unconditional and the adversary is allowed to jointly-tamper subsets of up to (t−1) shares. We believe that the techniques introduced in our construction may be of independent interest. Inspired by the well studied problem of perfectly secure message transmission introduced in the seminal work of Dolev et. al (J. of ACM’93), we also initiate the study of non-malleable message transmission. Non-malleable message transmission can be seen as a natural generalization in which the goal is to ensure that the receiver either receives the original message, or, the original message is essentially destroyed and the receiver receives an “unrelated” message, when the network is under the influence of an adversary who can byzantinely corrupt all the nodes in the network. As natural applications of our non-malleable secret sharing schemes, we propose constructions for non-malleable message transmission.},
+booktitle = {Proceedings of the 50th Annual ACM SIGACT Symposium on Theory of Computing},
+pages = {685–698},
+numpages = {14},
+keywords = {Secret Sharing, Threshold Cryptography, Non-Malleable Secret Sharing, Non-Malleable Message Transmission, Non-Malleable Codes},
+location = {Los Angeles, CA, USA},
+series = {STOC 2018}
+}
+
+
+%Ref [BS19]
+@InProceedings{BadSri19,
+author="Badrinarayanan, Saikrishna
+and Srinivasan, Akshayaram",
+editor="Ishai, Yuval
+and Rijmen, Vincent",
+title="Revisiting Non-Malleable Secret Sharing",
+booktitle="Advances in Cryptology -- EUROCRYPT 2019",
+year="2019",
+publisher="Springer International Publishing",
+address="Cham",
+pages="593--622",
+%abstract="A threshold secret sharing scheme (with threshold t) allows a dealer to share a secret among a set of parties such that any group of t or more parties can recover the secret and no group of at most {\$}{\$}t-1{\$}{\$}t-1parties learn any information about the secret. A non-malleable threshold secret sharing scheme, introduced in the recent work of Goyal and Kumar (STOC'18), additionally protects a threshold secret sharing scheme when its shares are subject to tampering attacks. Specifically, it guarantees that the reconstructed secret from the tampered shares is either the original secret or something that is unrelated to the original secret.",
+isbn="978-3-030-17653-2"
+}
+
+
+%Ref [KMS19]
+@INPROCEEDINGS{KumMekSah19,
+  author={A. {Kumar} and R. {Meka} and A. {Sahai}},
+  booktitle={2019 IEEE 60th Annual Symposium on Foundations of Computer Science (FOCS)}, 
+  title={Leakage-Resilient Secret Sharing Against Colluding Parties}, 
+  year={2019},
+  volume={},
+  number={},
+  pages={636-660},}
+  
+  
+%Ref [SV19]
+@InProceedings{SriVas19,
+author="Srinivasan, Akshayaram
+and Vasudevan, Prashant Nalini",
+editor="Boldyreva, Alexandra
+and Micciancio, Daniele",
+title="Leakage Resilient Secret Sharing and Applications",
+booktitle="Advances in Cryptology -- CRYPTO 2019",
+year="2019",
+publisher="Springer International Publishing",
+address="Cham",
+pages="480--509",
+%abstract="A secret sharing scheme allows a dealer to share a secret among a set of n parties such that any authorized subset of the parties can recover the secret, while any unauthorized subset learns no information about the secret. A leakage-resilient secret sharing scheme (introduced in independent works by Goyal and Kumar, STOC '18 and Benhamouda, Degwekar, Ishai and Rabin, CRYPTO '18) additionally requires the secrecy to hold against every unauthorized set of parties even if they obtain some bounded leakage from every other share. The leakage is said to be local if it is computed independently for each share. So far, the only known constructions of local leakage resilient secret sharing schemes are for threshold access structures for very low (O(1)) or very high ({\$}{\$}n -o({\backslash}log n){\$}{\$}) thresholds.",
+isbn="978-3-030-26951-7"
+}
+
+
+%Ref [Agg+19]
+@InProceedings{ADNOPRS19,
+author="Aggarwal, Divesh
+and Damg{\aa}rd, Ivan
+and Nielsen, Jesper Buus
+and Obremski, Maciej
+and Purwanto, Erick
+and Ribeiro, Jo{\~a}o
+and Simkin, Mark",
+editor="Boldyreva, Alexandra
+and Micciancio, Daniele",
+title="Stronger Leakage-Resilient and Non-Malleable Secret Sharing Schemes for General Access Structures",
+booktitle="Advances in Cryptology -- CRYPTO 2019",
+year="2019",
+publisher="Springer International Publishing",
+address="Cham",
+pages="510--539",
+%abstract="In this work we present a collection of compilers that take secret sharing schemes for an arbitrary access structure as input and produce either leakage-resilient or non-malleable secret sharing schemes for the same access structure. A leakage-resilient secret sharing scheme hides the secret from an adversary, who has access to an unqualified set of shares, even if the adversary additionally obtains some size-bounded leakage from all other secret shares. A non-malleable secret sharing scheme guarantees that a secret that is reconstructed from a set of tampered shares is either equal to the original secret or completely unrelated. To the best of our knowledge we present the first generic compiler for leakage-resilient secret sharing for general access structures. In the case of non-malleable secret sharing, we strengthen previous definitions, provide separations between them, and construct a non-malleable secret sharing scheme for general access structures that fulfills the strongest definition with respect to independent share tampering functions. More precisely, our scheme is secure against concurrent tampering: The adversary is allowed to (non-adaptively) tamper the shares multiple times, and in each tampering attempt can freely choose the qualified set of shares to be used by the reconstruction algorithm to reconstruct the tampered secret. This is a strong analogue of the multiple-tampering setting for split-state non-malleable codes and extractors.",
+isbn="978-3-030-26951-7"
+}
+
+
+%%% Cite doesn't work
+%Ref [CDM00]
+@inproceedings{CDM00,
+  author    = {Ronald Cramer and
+               Ivan Damg{\aa}rd and
+               Ueli M. Maurer},
+  editor    = {Bart Preneel},
+  title     = {General Secure Multi-party Computation from any Linear Secret-Sharing
+               Scheme},
+  booktitle = {Advances in Cryptology - {EUROCRYPT} 2000, International Conference
+               on the Theory and Application of Cryptographic Techniques, Bruges,
+               Belgium, May 14-18, 2000, Proceeding},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {1807},
+  pages     = {316--334},
+  publisher = {Springer},
+  year      = {2000},
+  url       = {https://doi.org/10.1007/3-540-45539-6\_22},
+  doi       = {10.1007/3-540-45539-6\_22},
+  timestamp = {Tue, 14 May 2019 10:00:53 +0200},
+  biburl    = {https://dblp.org/rec/conf/eurocrypt/CramerDM00.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}

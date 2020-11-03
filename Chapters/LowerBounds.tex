@@ -1,0 +1,141 @@
+\chapter{Lower bounds}
+\label{sec:lower-bounds}
+
+\section{A Lower bound on $t(n)$}
+
+First, we extend the lower bound of Nielsen et al.~\cite{NS20} to the (hardest) setting of 
+$m=1$ bits of leakage and arbitrarily large $p$ for the case of linear secret sharing schemes (which have the most applications, as for efficient leakage-resilient MPC). Recall their bound relies on $p$ being relatively small - polynomial in $n$, as originally considered in~\cite{EPRINT:BDIR19}) - on the other hand, their bound is more general in the sense that it is not limited to linear schemes.
+More precisely, we have:
+%%%
+\begin{theorem}\label{thm-lb}
+Let $C^+$  be an arbitrary $[n+1,\codedim,\F_p]$ code, where $2\codedim< p, \codedim\leq n$. Let $\mathrm{Sh}_C$ be a Massey secret-sharing scheme corresponding to the linear error-correcting code $C^+$, as described in Section~\ref{sec:prelim}. 
+Suppose the secret-sharing scheme $\mathrm{Sh}_C$ is $\epsilon$-local leakage resilient against ${\mathcal L}_{m=1,n,p}$.
+Then $\epsilon\geq (\frac{1}{\codedim})^{c\codedim}$, where $c$ is a universal positive constant.
+\end{theorem}
+
+The statement in Theorem~\ref{thm-lb} holds for arbitrary $n,p$, and is not asymptotic in nature.
+One simple corollary (as $n$ goes to infinity), restating as a bound on $k$.
+
+\begin{corollary}
+Let $C^+$  be an arbitrary $[n+1,\codedim,\F_p]$ code, where $2\codedim< p, \codedim\leq n$. Let $\mathrm{Sh}_C$ be a Massey secret-sharing scheme corresponding to the linear error-correcting code $C^+$.
+Let ${\mathcal L}_{m,n,p}$ be the set of all functions $\F^n_p\to \left(\zo^m\right)^n$ representing $m$-bit local leakage on each share of the $n$ parties.
+Suppose the secret-sharing scheme $\mathrm{Sh}_C$ is $2^{-\Omega(n)}$-local leakage resilient against ${\mathcal L}_{m=1,n,p}$. 
+Then $\codedim=\Omega(\frac{n}{\log(n)})$.
+\end{corollary}
+%%%
+The proof of Theorem~\ref{thm-lb} is based on an argument similar to the one made in~\cite{EPRINT:BDIR19}, when proving that $n$ can not be too small, lower bounding the distinguishing advantage attainable for a constant $n$ and additive scheme, by choosing a carefully designed $\vec{L}$.
+The extension of the statement and argument are indeed quite simple, and is brought here mostly for completeness.
+
+\begin{proof}
+We let $G$ to be the generating matrix of $C^+$. 
+Consider the shares given to minimal qualified parties $\shareVec{}[I]$. It is a well known fact about linear secret sharing schemes as above, that
+a set of parties can recover the secret iff the rows set of $G[I]$ spans $G[n+1]$. 
+As $C^+$ is of dimension $\codedim$, we must have $|I|=\codedim'\leq \codedim$ - assume w.l.o.g.\ that $I=[\codedim']$. Denote $G'=G[I,\cdot]$ and $G''=G[n+1,\cdot]$ (which is a vector). Let $K=Kernel\big(span(\{G''\})\big)$.
+Let $\beta\in \F^{\codedim'}_p$ be a vector such that $\beta\cdot G'=G''$. Then, from simple linear algebra, for a random sharing $\shareVec{0}$ of secret $\secret = 0$,
+$\shareVec{0}[I]$ is uniform over $C'=\{G'\cdot \vec{k}^T|\vec{k}\in K\}\subseteq \F^{k'}_p$. 
+In particular, every $\shareVec{0}[I]$ satisfies
+
+\begin{equation}\label{eq:span1}
+\ip{\beta,\shareVec{0}[I]}=\beta^T\cdot G'\vec{k}=G''\vec{k}=0
+\end{equation}
+
+Where $\Vec{k}$ is some element of $K$. Let $i\in [\codedim']$ where $\beta_i\neq 0$ (it exists, as $G''\neq 0$).
+Rewriting Equation~\ref{eq:span1}, we get
+\begin{equation}\label{eq:span2}
+\shareVec{0}[i]=-\sum_{j\in [\codedim']\setminus{\{i\}}}\frac{\beta_j}{\beta_i}\shareVec{0}[j]
+\end{equation}
+Let $h_0=\lfloor p/(2\codedim')\rfloor$. For each $j\in [\codedim']\setminus{\{i\}}$, if $\beta_j\neq 0$, set $A_j=\{\frac{-\beta_i}{\beta_j}a|a\in\{0,\ldots,h_0-1\}\}$. 
+Otherwise, set $A_j=\{0,\ldots,h_0-1\}$ (in fact, the latter can be an arbitrary sufficiently large set). For $i$ let $A_i=\{0,\ldots,(p-1)/2\}$.
+Let $\vec{L}=(L_1,\ldots,L_n)$ where $L_n(\shareVec{0}[i])=1$ if $sh_i\in A_i$, and $L_n(\shareVec{0}[i])=0$ otherwise. 
+Now, we observe
+\begin{claim}\label{clm-ajprob}
+$Pr[\shareVec{0}[I]\in A_1\times \ldots\times A_{k'}]=\Pi_{j\in [k']\setminus{\{i\}}}|A_j|/p$
+\end{claim}
+
+\begin{proof}
+To see this, we observe that for a random $x\in C'$, $x[I\setminus{i}]$ is uniform over $\F^{\codedim'-1}_p$.
+Then, by definition of the $A_j$'s, the probability of
+\begin{align}
+&Pr\left[ \shareVec{0}[I\setminus\{i\}]\in A_1\times \ldots\times A_{i-1}\times A_{i+1}\ldots A_{k'} \right] = \Pi_{j\in [k']\setminus{\{i\}}}|A_j|/p \nonumber.
+\end{align}
+
+Now, conditioned on the event - $\shareVec{0}[I\setminus\{i\}]\in A_1\times \ldots\times A_{i-1}\times A_{i+1}\ldots A_{k'}$, $\shareVec{0}[i]\in A_i$ by Equation~\ref{eq:span2}, and the choice of the other $A_j$s.
+Namely - with probability 1, $\shareVec{0}[i]$ is the sum of at most $\codedim'\leq \codedim$ elements, each in $\{0,\ldots,h_0-1\}$, and the result follows.
+
+To prove that $x[I\setminus{i}]$ is uniform over $\F^{\codedim'-1}_p$, it suffices to prove $C'[I\setminus{i}]$ is indeed of dimension $\codedim'-1$.
+As $P_I$ is a minterm of $Sh_C$, all rows in $G'$ are linearly independent. Furthermore, as $K$ is the right kernel of $span(G'')$, $span(G'')$ is the entire left kernel of $K$. Assuming for contradiction that $rowspan(G[I\setminus{\{i\}},\cdot])$ has dimension $<\codedim'-1$, this implies the existence of a vector $\beta'$ with $\beta'[i]=0$, such that $\beta'\cdot G''$ is in the left kernel of $K$, and thus a multiple of 
+$G''$, contradicting the fact that $P_I$ is a minterm.
+\end{proof}
+
+Substituting the sizes of the $|A_j|$'s in Claim~\ref{clm-ajprob}, we have
+\begin{align}\label{eq:s0}
+Pr\Big[\shareVec{0}[I]\in A_1\times \ldots\times A_{\codedim'}\Big] &\geq \Big(\lfloor p/(2k')\rfloor/p\Big)^{\codedim-1} \\ 
+&\geq \Big(1/(2\codedim)-(1-1/2\codedim)/p\Big)^{\codedim-1} \nonumber\\
+&\geq \Big(1/\codedim(2\codedim+1)\Big)^{\codedim}\geq 1/(3\codedim)^{2k} \nonumber
+\end{align}
+
+Here the second transition is due to rounding issues, and the one before last transition uses the fact that $p\geq 2\codedim+1$.\footnote{Taking the bound on $p$ to be slightly larger, say $p\geq 3\codedim$ would make the bound on the error about $(1/\Omega(\codedim))^\codedim$, but this is not very significant.} 
+
+On the other hand, for a random sharing of a random secret $\secret \in \F_p$, the distribution of 
+$\shareVec{}[I]$ is uniform over $\F^{\codedim'}_p$ (as now the randomness vector used by the sharing scheme is picked at random from $\F^\codedim_p$), and $G'$ is of full rank. Thus, 
+
+\begin{align}
+ Pr\Big[\shareVec{}[I]\in A_1\times \ldots\times A_{\codedim'} \Big] &= Pr\Big[\shareVec{0}[I]\in A_1\times \ldots\times A_{\codedim'}\Big]|A_i|/p \nonumber \\
+ &\leq 0.5 Pr\Big[\shareVec{0}[I]\in A_1\times \ldots\times A_{\codedim'}\Big] \nonumber
+\end{align}
+
+
+Thus, from Equation~\ref{eq:s0} we have $Pr\big[\vec{L}(\shareVec{0})[I]=\vec{1}\big]-Pr\big[\vec{L}(\shareVec{})[I]=\vec{1}\big]\geq 0.5/(3\codedim)^{2\codedim}$. 
+Therefor, by an averaging argument, there exists a secret $\secret_1$, such that 
+$\SD{\shareVec{\secret_1}[I]}{\shareVec{0}[I]}\geq 0.5/(3\codedim)^{2\codedim}$. Therefore, 
+
+\begin{align}
+\SD{\vec{L}(\shareVec{\secret_1})[I]}{\vec{L}(\shareVec{0})[I]} &\geq 0.5\Big(Pr\big[\vec{L}(\shareVec{0})[I]=
+\vec{1}\big]-Pr\big[\vec{L}(\shareVec{\secret_1})[I]=\vec{1}\big]\Big) \nonumber \\
+& \geq 0.25/(3\codedim)^{2\codedim} \nonumber
+\end{align}\end{proof}
+
+
+\begin{remark}
+In fact, it follows from the proof that the lower bound is slightly stronger then stated, 
+if a minterm of size $\codedim'\leq \codedim$ exist. This is possible only in non-MDS codes. 
+\end{remark}
+
+\section{Limitations of our techniques}\label{sec:lim}
+
+In our proofs so far, both for all MDS codes, and an average MDS code, we relied on bounding the magnitudes of the Fourier coefficient products in the expression for the bound in Equation~\ref{eq:start}.
+We demonstrate that in this case, improving over Cauchy-Schwarz while still taking absolute values of Fourier coefficients can not yield $2^{-\Omega(n)}$ error upper bounds, in case we only use Parseval's identity to classify the set of possible Fourier distributions of the boolean leakage functions.\footnote{The larger culprit appears to be taking absolute values - we believe that a counterexample similar to the hypothetical one below can be demonstrated on real Fourier spectrums of boolean leakage functions.} 
+
+\paragraph{An example illustrating that new techniques are required.}
+Consider a hypothetical function vector $\mathbf{L}=(L_1,\ldots,L_n) \in {\mathcal L}_{m,n,p}$, where all
+$A_{i,\ell_i}$'s corresponding to some leakage vector $\ell$, are of size $(p\pm 1)/2$ from an MDS code $C$ with parameters $[n,\codedim,\F_p]$ (corresponding to sharings of 0), where for every $i,\ell_i,\alpha_i\neq 0$ the coefficient $\widehat{\vec{1}}_{\ell_i}(\alpha_i)$ is of magnitude $1/\sqrt{2p}$ (the 0 coefficient is $1/2$). 
+Such a function vector does not necessarily exist, but
+it is consistent with Parseval's identity (more precisely, the coefficients should be $\sqrt{(p\pm 1)/2p^{3/2}}$ to be consistent, but this is inconsequential for our purposes).
+Replacing all coefficients with their absolute values and substituting into 
+Equation~\ref{eq:start}, we would get a bound of 
+
+\begin{align}
+\SD{\vec{L}(C)}{\vec{L}(\F^n_p)} &=\sum_{\vec{\ell}} \left|\sum_{\alpha\in C^{\bot}\setminus{\{0\}}}\prod^n_{i=1}\widehat{\mathbf{1}}_{\ell_i}(\alpha_i) \right|\nonumber \\ \label{eq:upbound}
+& \leq 2^m \cdot \left|\sum_{\alpha\in C^{\bot}\setminus{\{0\}}}\prod^n_{i=1}\widehat{\mathbf{1}}_{\ell_i=0}(\alpha_i) \right| \\
+&\leq 2^m \cdot \prod_{i\in[n-\codedim]}\Big(\sum_{\alpha_i\in\F_p}|\widehat{\mathbf{1}}_{\ell_i=0}(\alpha_i)|\Big)\Big(\frac{1}{\sqrt{2p}}\Big)^{\codedim} \label{eq:bound} \\\nonumber
+&= 2^m \cdot \Big(\frac{1}{\sqrt{2p}}\cdot p\Big)^{n-\codedim}\Big(\frac{1}{\sqrt{2p}}\Big)^\codedim\\
+&= 2^m \cdot \Big(\frac{1}{2}\Big)^{n/2}\sqrt{p}^{n-2\codedim}\nonumber
+\end{align}
+
+In Equation~\ref{eq:upbound}, we assumes w.l.o.g.\ that $\ell=\vec{0}$ yields the largest $\left|\sum_{\alpha\in C^{\bot}\setminus{\{0\}}}\prod^n_{i=1}\widehat{\mathbf{1}}_{\ell_i=0}(\alpha_i) \right|$.
+
+In~\ref{eq:bound} we bound 
+the expression in~\ref{eq:upbound} using the current techniques - that is, bound each $\widehat{\mathbf{1}}_{\ell_i=0}(\alpha_i)$ by its absolute value and assume the Fourier distribution of $\vec{1}_{\ell_i=0}$ is as above from here and on.
+Also, to simplify matters, we did not subtract the coefficient product corresponding to the 0-codeword, as it does not significantly increase the resulting upper bound and replaced it by $\frac{1}{\sqrt{2p}}$.
+
+Note that indeed, for large enough $p$ ($p\gg2^n$), the above bound can be made arbitrarily large.
+
+This is clearly not tight, as \emph{all} leakage vectors' contributions together sum up to 1, as these are expressions for a statistical distance between a certain pair of probability distributions. 
+Note that looking at a ``slightly more realistic'' Fourier spectrum, where the $\widehat{\vec{1}}_{\ell_i}(0)$'s are the correct $|A_{i,\ell_i}|/p$ values, the above bound is not improved, and even grows somewhat. 
+
+\begin{remark}
+A simple calculation reveals that taking absolute values of Fourier coefficients as above, yields
+similar lower bounds for the true statistical distance between the leakage from sharings of any pair of secrets $s_1,s_2$ (rather than upper bounding it by a statistical distance between leakage from a sharing of $s=0$ and leakage from a uniform distribution over $\F^n_p$, as we currently do).
+\end{remark}
+
+We conclude that to get a true estimation of the leakage, additional ideas will be needed to get a more precise Fourier Analysis (or use a different approach altogether).

@@ -1,0 +1,165 @@
+%\chapter {Preliminary Results}
+%\section {Theoretical Results}
+%\section {Simulation Results}
+
+\chapter{Preliminaries}
+%\section{Preliminaries}
+\label{sec:prelim}
+
+
+We denote by $\Ent{p}=-p\cdot \ln(p)-(1-p)\cdot \ln(1-p)$ the Shannon entropy of $0<p<1$.
+For $j\leq k$, where $(n-j)/n, j/n=\Theta(1)$ it follows from Stirling's approximation that
+\begin{align}
+&\binom{n}{j}=\left(1+o(1)\right)2^{\Ent{j/n}n}\label{eq:bin}
+\end{align}
+By $\log(x)$ we refer to the base 2 logarithm unless stated otherwise. 
+
+Given two matrices $M_1\in\F^{a_1\times b}, M_2\in\F^{a_2\times b}$, we denote by $(M_1;M_2)$
+the matrix resulting from concatenating $M_2$ under $M_1$, \ie, the matrix $\smalleft[\begin{smallmatrix}M_1\\M_2\end{smallmatrix}\smarightright]$.
+We denote the number of rows (columns) in $M_1$ by $rows(M)$ ($cols(M)$).By default, vectors are row vectors (which are sometimes viewed as $1\times a$ matrices). A submatrix corresponding to index sets of rows and columns $X,Y$ respectively is denoted by $M[X,Y]$. In this context, `*' stands for the set of all rows or columns respectively, and abbreviate singleton sets via the element contained in it. We sometimes use $M[X]$ as an abbreviation for $M[X,*]$. Similarly, for a vector $v$, $v[I]$ denotes the vector resulting from projecting $v$ to a subset $I$ of its coordinates. For a set of vectors $\mathcal{G}\subseteq A^r$, and a set of indices $I\subseteq [r]$, we also denote $\mathcal{G}[I]=\{a[I] \;|\; a\in \mathcal{G}\}$.  
+%Sets of size 1 are abbreviated as the element itself.
+
+For a set $A$, when there is no risk of confusion, we sometimes abuse notation, and view $A$ as the uniform distribution over $A$.
+
+
+
+\section{Error correcting codes.} 
+An $[n,\codedim,\F_p]$ linear error-correcting code (ECC) $C$ is a subspace of $\F^n_p$ of dimension $\codedim$. 
+A code is said to have distance $\codedist$ if every pair of distinct codewords have Hamming distance at least $\codedist$. A generating matrix $\generateMatrix = (g_1;...;g_n) \in\F^{n\times k}_p$ of $C$ is a matrix whose columns constitute a basis of $C$. The dual code $C^\bot$ of a linear code $C$ is $\{x\in \F^n_p \;|\; \forall c \in C,\ip{x,c} = 0\}$, and we denote the generating matrix of $C^\bot$ by $H=(h_1;\ldots;h_n)\in \F^{n\times (n-k)}_p$.
+
+We say a code is Maximum Distance Separable (MDS) if $\codedist=n-\codedim+1$. %We use the following facts about MDS codes. 
+ %$C^\bot$ is also a linear $[n,\codedim'=n-\codedim,\F_p]$ code.
+We will need a few well known equivalent formulations of MDS codes.
+\begin{claim}
+Let $C$ be a linear $[n,\codedim,\F_p]$ code. Then the following statements are equivalent:
+\begin{itemize}
+    \item $C$ is a linear $\mdscode{n}{\codedim}{\F_p}$ code.
+    \item $C^\bot$ is a linear $\mdscode{n}{\codedim'=n-\codedim}{\F_p}$ code.
+    \item Every set of $\codedim$ rows of $\generateMatrix$ are linearly independent.
+\end{itemize}
+\end{claim}
+
+\noindent 
+
+
+\section{Leakage resilient secret sharing}
+% Macro usage example: \shareSubVec{A_7}
+We consider the standard notion of perfect threshold secret sharing schemes. Namely, an $(n,t)$-secret sharing scheme over a finite field $\F_p$ is a pair of algorithms $(Sh,Rec)$, where $Sh$ is a randomized mapping taking a secret $\secret \in \F_p$ to a sequence of shares $\shareVec{}=(\shareSubVec{}{1},\ldots,\shareSubVec{}{n})$. It is correct in the sense that for each $A\subseteq [n]$ of size $|A|\geq t$ and $\shareVec{}\leftarrow Sh(\secret)$, it hold that $Rec(A,\shareSubVec{}{A}=(\shareSubVec{}{i})_{i\in A})=\secret$ with probability 1 (over the random choices of $Sh$). It is private in the sense that for $\shareVec{0} \leftarrow Sh(\secret_0),\shareVec{1}\leftarrow Sh(\secret_1)$, and every $A\subseteq [n]$ of size $|A|<t$, $\SD{\shareSubVec{0}{A}}{\shareSubVec{1}{A}}=0$. We say a scheme is linear, if in addition, for every share $\shareSubVec{}{i}$ comes from a domain $S_i=\F^{l_i}_p$ for some $l_i\in \mathbb{N}^+$, and for each $a,b,\secret_0,\secret_1\in \F_p$, and valid sharings
+$\shareVec{0},\shareVec{1}$ respectively, it holds that $a\shareVec{0}+b\shareVec{1}\in support(Sh(a \secret_0+b \secret_1))$.
+
+
+In this work, we study the leakage resilience of secret sharing schemes arising from MDS codes in a natural way as in Massey's construction. That is, given a linear $\mdscode{n+1}{\codedim=t}{\F_p}$ code $C^+$ with generating matrix $\generateMatrix^+ = (g^+_1;...;g^+_{n+1})$, the corresponding (linear) $(n,t)$-secret sharing scheme over $\F_p$ is defined as,
+$Sh(\secret)$ samples a random vector $\beta=(\beta_1,\ldots,\beta_t)\in\F^t_p$ conditioned on $(\generateMatrix^+ \cdot \beta^T)[n+1]=\secret$, and sets $\shareSubVec{}{i}=\ip{\beta,g^+_i}$. For $|I| \geq t$ and the share vector $\shareSubVec{}{I}$ corresponding to parties $I\subseteq [n]$, $Rec(I,\shareSubVec{}{I})$ takes a subset $I'\subseteq I$ of size $t$, computes $\beta = (G^+[I'])^{-1}{(\shareSubVec{}{I'})}^T$, and outputs $g^+_{n+1}\cdot \beta^T$. We observe that the set of sharings of $\secret=0$ is also a linear MDS code $C$, with parameters $[n,\codedim-1,\F_p]$.
+%Indeed $H[I]$ is invertible by MDS properties of the code. Privacy against any subset $I$ of size $t-1$ also easily follows from the fact that $H[I\cup\{i\}]$ is invertible by simple linear algebra.
+
+Here and elsewhere, when we refer to~\cite{EPRINT:BDIR19}, we refer to their eprint version~\cite{EPRINT:BDIR19}.
+We follow the definition of local leakage resilient secret sharing schemes as in~\cite{EPRINT:BDIR19}, Definition 4.1.  For completeness, we briefly recall this notion, restricted to MDS code based schemes as above. For a secret sharing scheme $(Sh_C,Rec_C)$ we denote ${\mathcal L}_{m,n,p}$ to be the set of all functions $\F^n_p\to \left(\zo^m\right)^n$ representing $m$-bit local leakage on each share of the $n$ parties.
+We say the scheme $(Sh_C,Rec_C)$
+is a $(m,\epsilon)$-Leakage resilient secret sharing scheme if for all leakage function vectors $\vec{L}=(L_1,\ldots,L_n) \in {\mathcal L}_{m,n,p}$,
+and all pairs of secrets $\secret_0,\secret_1\in\F_p$, we have $\SD{\vec{L}(Sh_C(\secret_0))}{\vec{L}(Sh_C(\secret_1))}\leq \epsilon$.
+
+For a party $P_i$, and $\ell_i\in \{0,1\}^m$, let $A_{i,\ell_i}=\{ x \in \F_p | L_i(x) = \ell_i \}$. We denote by $\vec{1}_{A_i,\ell_i}(x):\F_p\rightarrow \mathbb{C}$ the boolean function mapping $x$ to $1$ if $x\in A_{i,\ell_i}$ and to $0$ otherwise.
+When $i$ is clear from the context we sometimes abuse notation and let $\vec{1}_{\ell_i}$ denote $\vec{1}_{A_{i,\ell_i}}$.
+
+For simplicity, our definition above corresponds to the setting with $\Theta=0$ as considered in~\cite{EPRINT:BDIR19}, where the adversary does not see any parties' shares, but only the output of the leakage function, so we exclude $\Theta$ from the notation.
+Our results can be translated into resilience for other values with a certain loss in parameters of $\Theta$ as explained in~\cite{EPRINT:BDIR19}.
+
+
+It is observed in~\cite{EPRINT:BDIR19} that given a leakage functions vector $\vec{L} = (L_1,\ldots,L_n)$, the leakage advantage of the scheme is upper bounded by the statistical distance of $\vec{L}$ applied to a certain pair of distributions.
+
+\begin{observation}\label{obs:bound}
+Let $(Sh_C,Rec_C)$ denote an $n$-player Massey secret sharing scheme over $\F_p$. Fix an integer $m\leq \log(p)$. Then for $m$-bit local leakage functions vector $\vec{L}\in {\mathcal{L}}_{m,n,p}$, we have: 
+$\max_{\vec{L},\secret_0,\secret_1} \SD{\vec{L}(Sh(\secret_0))}{\vec{L}(Sh(\secret_1))} \leq 2\max_{\vec{L}} \SD{\vec{L}(C)}{\vec{L}(\F^n_p)}$. 
+\end{observation}
+This the case as for every $\vec{L},\secret_0,\secret_1$,
+\begin{align*}
+    \SD{\vec{L}(Sh(\secret_0))}{\vec{L}(Sh(\secret_1))} &\leq
+    \SD{\vec{L}(C+v_0)}{\vec{L}(\F^n_p)} + \SD{\vec{L}(C+v_1)}{\vec{L}(\F^n_p)} \\
+    &\leq 2 \max_{\vec{L}}\SD{\vec{L}(C)}{\vec{L}(\F^n_p)}
+\end{align*} 
+
+Here $v_0,v_1$ are some sharings of $\secret_0,\secret_1$ respectively, both are multiplies of the same vector $v$. The first inequality is due to the triangle inequality for the Euclidean space with the $\ell_1$-norm. 
+Indeed, by linearity of the scheme, $Sh(\secret_0)$ is uniformly distributed over $C+v_0$ for $v_0=\secret_0v$, for every $\secret_0\in \F_p$.
+The last inequality  follows from the claim that $\SD{\vec{L}(C+v_0)}{\vec{L}(\F^n_p)} = \SD{\vec{L}'(C)}{\vec{L}'(\F^n_p)}$ for $\vec{L}'=(L'_1,\ldots,L'_n)$, where $L'_j(x)=L_j(x+s_0 v[j])$ for each $j\in [n]$.  In particular, $\SD{\vec{L}'(C)}{\vec{L}'(\F^n_p)} \leq \max_\vec{L} \SD{\vec{L}(C)}{\vec{L}(\F^n_p)}$. Finally, we get that $\SD{\vec{L}(C+v_0)}{\vec{L}(\F^n_p)} \leq \max_\vec{L} \SD{\vec{L}(C)}{\vec{L}(\F^n_p)}$.
+By similar reasoning it holds that $\SD{\vec{L}(C+v_1)}{\vec{L}(\F^n_p)} \leq \max_\vec{L} \SD{\vec{L}(C)}{\vec{L}(\F^n_p)}$, and the claim follows.
+\footnote{The last step generalizes the reasoning of Claim 4.8.1 in~\cite{EPRINT:BDIR19}. for additive secret sharing schemes}
+
+%The above observation allows us to reduce bounding local leakage of $(Sh_C,Rec_C)$ to bounding a certain function of the leakage from the uniform distribution on $C$ (although it is not necessarily tight), as this is the type of bound we use throughout  the paper. Thus, for notational convenience, we will sometimes identify between $(Sh_C,Rec_C)$ and $C$.
+%\nanat{Think whether we want to talk about a tighter version}
+%%%%
+
+We will need the following claim from ~\cite{EPRINT:BDIR19} connecting $\SD{\vec{L}(C)}{\vec{L}(\F^n_p)}$ to evaluations of $\vec{L}$ on elements of $C^\bot \setminus\{0\}$. See Lemma 4.18 ~\cite{EPRINT:BDIR19} for proof details.
+
+\begin{claim} \label{clm:dual}
+Let $C$ be a linear $[n,\codedim,\F_p]$ code. Then,
+\begin{align}
+%%% 2.1 
+%\label{eq:3.2}
+\SD{\vec{L}(C)}{\vec{L}(\F^n_p)}=\sum_{\vec{\ell}} \left|\sum_{\alpha\in C^{\bot}\setminus{\{0\}}}\prod^n_{i=1}\widehat{\mathbf{1}}_{\ell_i}(\alpha_i) \right|=\sum_{\vec{\ell}}\left|\sum_{\beta\in \F^{n-t+1}_p\setminus{\{0\}}}\prod^n_{i=1}\widehat{\mathbf{1}}_{\ell_i}(\ip{\beta,h_i})\right| \nonumber
+\end{align}
+\end{claim}
+
+
+\begin{remark}
+The definition of a Massey scheme is straightforwardly generalized to any linear code $C$ with parameters $[n,t]$, which is not
+necessarily an MDS code. The resulting secret sharing scheme is not necessarily threshold, and the qualified sets correspond to row subsets $\generateMatrix_I$ for $I\subseteq [n]$ spanning row $\generateMatrix_{n+1}\neq \vec{0}$ (for linear $\mdscode{n+1}{\codedim}{\F_p}$ codes, these are indeed all sets of size $\geq t$, as in such codes sets of size $t$ span every row of the generating matrix), which may be a useful extension. In fact, this type of secret sharing schemes corresponds exactly to ideal linear secret sharing schemes (with $\generateMatrix_{[n]}$ corresponding to matrix and $\generateMatrix_{n+1}$ to the target vector). In fact, both our positive results - those applying to all MDS-induced Massey schemes with given parameters $n,t$ (Theorem~\ref{shamir}) and those applying to a large fraction of such schemes can be extended to work for non-MDS schemes (Theorem~\ref{thm:mostmds}) with a certain loss of parameters, as longs as we have a good lower bound on qualified set size (even if not all are equal). Theorem~\ref{thm-lb} works for non-threshold Massey schemes as is, with the same parameters. See the full version for details.
+\end{remark}
+%% The last equality follows by observing that replacing a summation over $C$ by summation over $C+v$ for a fixed vector $v$ in the proof of Lemma 4.16 in~\cite{EPRINT:BDIR19} (Poisson Summation Formula), exactly the same expression for $\SD{\vec{L}(C)}{\vec{L}(\F^n_p)}$ is obtained. Thus, in all our results, we focus on bounding the leakage advantage by bounding the latter expression $\SD{\vec{L}(C)}{\vec{L}(\F^n_p)}$.
+
+
+
+\section{Fourier Analysis}
+%\label{sec:fourier-prelim}
+For our purposes, we only recall Fourier analysis for $G$ which is the additive group of a finite field.
+Let $\bbF=\{0,\dotsc,p-1\}$ be a field of order $p$, where $p$ is prime.
+Let $f \colon \bbF \to \bbC $ be an arbitrary complex-valued function.
+For $z\in \bbC$, we let $\overline{z}$ denote the complex conjugate of $z$.
+We define the inner-product of two functions $f,g\colon\bbF\to\bbC$ as follows
+\begin{equation}\label{eq:norm}
+\ip{f,g} \defeq \frac1p \sum_{x\in\bbF} f(x)\overline{g(x)}.
+\end{equation}
+A character of $\F$ is a homomorphism from the additive group $\F$ to the multiplicative group $\bbC^*$.
+The set of characters of $\F$, to which we refer to as $\widehat{\F}$ itself forms a group under coordinate-wise multiplications. In fact $\widehat{\F}=\left\{\chi_0,\chi_1,\dotsc,\chi_{p-1}\right\}$ precisely satisfies
+$\chi_i(x) = \exp\left(2\pi \imath \cdot ix/p\right)$. The $\chi_i$'s form an orthonormal basis of
+$\bbC^p$. That is, we have:
+\begin{align}
+\ip{\chi_i,\chi_j} = \begin{cases}0,&\text{if }i\neq j\\1,&\text{if }i=j\end{cases}.
+\end{align}
+  
+%In fact, for $i,x\in\bbF$, the definition of $\chi_i(x) = \exp\left(2\pi \imath \cdot ix/p\right)$ suffices. 
+For $i\in\bbF$, we define the Fourier coefficient $\widehat f(i)\defeq \ip{f,\chi_i}$. 
+Furthermore, the mapping $f\mapsto \widehat f$ is a full-rank linear mapping. 
+Parseval's identity states that
+\begin{align}
+\ip{f,f} = \sum_{i\in\bbF} \widehat f(i)^2.  
+\end{align}
+  
+As~\cite{EPRINT:BDIR19}, we follow the “standard” notation in additive combinatorics. In this notation, when working over $\F$, the Haar measure as in Equation~\ref{eq:norm}, and the counting measure assigning $1$ to each $i\in\widehat{\F}$ is used when working over $\widehat{\F}$. So, norms will be taken with respect to the underlying measure. Using this convention, we can compactly rephrase Parseval's identity as $\ip{f,f} = \ip{\widehat{f},\widehat{f}}.$
+
+%In general, when considering functions $f,g\colon \bbF^n \to \CC$, where $n\in\NN$, we define
+%  $$ \ip{f,g} \defeq \frac1{p^n} \sum_{x\in\bbF^n} f(x)\overline{g(x)}.$$
+%The orthonormal basis functions are $\chi_{i_1,\dotsc,i_n}\colon\bbF^n\to\CC$, and 
+%  $$\chi_{i_1,\dotsc,i_n}(x_1,\dotsc,x_n) \defeq \exp\left(2\pi \imath \sum_{j=1}^ni_jx_j/p\right), $$
+%where $i_1,\dotsc,i_n,x_1,\dotsc,x_n\in\bbF$.
+%For $i\in\bbF^n$, we define the Fourier coefficient $\widehat f(i)\defeq \ip{f,\chi_i}$.
+%The Parseval's identity states that
+%  $$ \ip{f,f} = \sum_{i\in\bbF^n} \widehat f(i)^2.$$
+
+Quoting for completeness, the lemma states
+that $\sum_{\ell_i}|\widehat{\vec{1}}_{\ell_i}(\alpha)|= 1$ if $\alpha=0$ and is upper-bounded by the constant $c_m<1$ otherwise (for every constant $m\geq 1$). For instance, $\lim_{p\rightarrow \infty} c_1= 2/\pi$ when $m=1$.
+
+We will need the following technical Lemma from~\cite{EPRINT:BDIR19}.
+\begin{lemma}(Lemma 4.17,~\cite{EPRINT:BDIR19}) \label{lem:sumlibound}
+Let $\vec{L}\in\mathcal{L}_{m,n,p}$, where $m$ is a constant. Then, for each $i \in [n]$, it holds that 
+\begin{align}
+\nonumber
+\begin{cases}
+\sum_{\ell_i}|\widehat{\vec{1}}_{\ell_i}(\alpha)|=1 &\text{if}\alpha=0 \\
+\sum_{\ell_i}|\widehat{\vec{1}}_{\ell_i}(\alpha)|\leq c_m &\text{if }\alpha\neq 0\end{cases}
+\end{align}
+for $c_m=\frac{2^m \sin{(\pi / 2^m)}}{p \sin{(\pi / p)}}$. Furthermore, $c_m=1-\Omega_m(1)$, for sufficiently large $p$.\footnote{For instance, for $\lim_{p\rightarrow \infty} c_1= 2/\pi$.}
+\end{lemma}
+    
+
+
+

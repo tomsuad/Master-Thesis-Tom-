@@ -1,0 +1,218 @@
+% Appendix Template
+\chapter{Appendix}
+
+\section{Proof of Theorem \ref{shamir}} % Main appendix title
+\label{proof-shamir}
+%\label{AppendixX} % Change X to a consecutive letter; for referencing this appendix elsewhere, use \ref{AppendixX}
+
+Let $C$ be a linear $\mdscode{n+1}{\codedim}{\F_p}$ code. The scheme induces a $(n,t=\codedim)$ linear secret sharing scheme $Sh_C$ as explained in Section~\ref{sec:prelim}.
+As mentioned in Section~\ref{sec:prelim}, the leakage advantage of the scheme is upper bounded by $\SD{\vec{L}(C)}{\vec{L}(\F^n_p)}$, which we bound next. 
+
+We start as in~\cite{EPRINT:BDIR19}, in the proof of their Lemma 4.18. These (identical)
+calculations appear in the first three lines of the derivation below. Here $I_1,I_2$ are disjoint sets of coordinates of size $n-t+1$ each, and $I_3=[n]\setminus{(I_1\cup I_2)}$. For $\beta\in 
+\F^{n-t+1}_p\setminus{\{0\}}$ we define $K_j=\{k' \in I_j | \ip{\beta,h_{k'}}=0 \}$.
+%, and for $I'_j \subseteq I_j$ we define $K'_j=\{k \in I'_j | \ip{\beta,h_k}=0 \}$.
+
+{\allowdisplaybreaks
+\begin{align}
+%%% A.1
+&\SD{\vec{L}(C)}{\vec{L}(\F^n_p)}=\sum_{\vec{\ell}} \left|\sum_{\alpha\in C^{\bot}\setminus{\{0\}}}\prod^n_{i=1}\widehat{\mathbf{1}}_{\ell_i}(\alpha_i) \right|\label{eq:2}\\ &\nonumber \\
+%%% A.2
+&=\sum_{\vec{\ell}}\left|\sum_{\beta\in \F^{n-t+1}_p\setminus{\{0\}}}\prod^n_{i=1}\widehat{\mathbf{1}}_{\ell_i}(\ip{\beta,h_i})\right|\label{eq:3}\\ &\nonumber \\
+%%% A.3  
+&= \sum_{\vec{\ell}}\left|\sum_{\beta\in  \F^{n-t+1}_p\setminus{\{0\}}}\left(\prod_{i\in I_1}\widehat{\mathbf{1}}_{\ell_i}(\ip{\beta,h_i})\right)\cdot \left(\prod_{i\in I_2}\widehat{\mathbf{1}}_{\ell_i}(\ip{\beta,h_i})\right)\cdot \left(\prod_{i\in I_3}\widehat{\mathbf{1}}_{\ell_i}(\ip{\beta,h_i})\right)\right|\label{eq:4}\\ &\nonumber \\
+%%%18
+%&\leq \sum_{\vec{\ell}}\sum_{0\leq i+j+l\leq n-t+1} \\
+%&\hphantom{{}=\leq \sum_{\vec{\ell}}}\sum_{\substack{\beta\in \F^{n-t+1}_p\setminus{\{0\}}\label{eq:5} s.t. \\ |K_1|=i,\\ |K_2|=j,\\ |K_3|=l}} \left|\left(\prod_{x\in I_1}\hat{\mathbf{1}_{\ell_x}}(\ip{\beta,h_x})\right)\cdot \left(\prod_{y\in I_2}\hat{\mathbf{1}_{\ell_y}}(\ip{\beta,h_y})\right)\cdot \left(\prod_{z\in I_3}\hat{\mathbf{1}_{\ell_z}}(\ip{\beta,h_z})\right) \right| \nonumber \\ &\nonumber \\
+%%% A.4
+&\leq \sum_{\vec{\ell}}\sum_{0\leq i+j+l\leq n-t+1} \; \sum_{\substack{\beta\in \F^{n-t+1}_p\setminus{\{0\}}\label{eq:5} \\ s.t. \; |K_1|=i,\\ \indent |K_2|=j,\\ \indent |K_3|=l}} \Bigg|\left(\prod_{x\in I_1}\widehat{\mathbf{1}}_{\ell_x}(\ip{\beta,h_x})\right)\cdot \\
+& \hphantom{{}=\sum_{\vec{\ell}}\sum_{0\leq i+j+l\leq n-t+1} \sum_{\substack{\beta\in \F^{n-t+1}_p\setminus{\{0\}} s.t. \\ |K_1|=i,\\ |K_2|=j,\\ |K_3|=l}}} \left(\prod_{y\in I_2}\widehat{\mathbf{1}}_{\ell_y}(\ip{\beta,h_y})\right)\cdot \left(\prod_{z\in I_3}\widehat{\mathbf{1}}_{\ell_z}(\ip{\beta,h_z})\right) \Bigg| \nonumber \\ &\nonumber \\
+%%%19
+%&= \sum_{\vec{\ell}}\sum_{0\leq i+j+l\leq n-t+1} \sum_{\substack{I'_1\subseteq I_1,|I'_1|=i\\ \;\;\;\;I'_2\subseteq I_2,|I'_2|=j\\ \;\;\;\;I'_3\subseteq I_3,|I'_3|=l\\}}\\ &\hphantom{{}==\sum_{\vec{\ell}}\sum_{0\leq i+j+l\leq n-t+1}} \sum_{\substack{\beta\in \F^{n-t+1}_p\setminus{\{0\}}\label{eq:6} s.t.\\\forall k\in K'_1\\ \forall k\in K'_2\\ \forall k\in K'_3}} \left|\left(\prod_{x\in I_1}\hat{\mathbf{1}_{\ell_x}}(\ip{\beta,h_x})\right)\cdot \left(\prod_{y\in I_2}\hat{\mathbf{1}_{\ell_y}}(\ip{\beta,h_y})\right)\cdot \left(\prod_{z\in I_3}\hat{\mathbf{1}_{\ell_z}}(\ip{\beta,h_z})\right)\right|\nonumber \\ &\nonumber \\
+%%% A.5
+&= \sum_{\vec{\ell}}\sum_{0\leq i+j+l\leq n-t+1} \; \sum_{\substack{I'_1\subseteq I_1,|I'_1|=i\\ I'_2\subseteq I_2,|I'_2|=j\\ I'_3\subseteq I_3,|I'_3|=l\\}} \; \sum_{\substack{\beta\in \F^{n-t+1}_p\setminus{\{0\}}\label{eq:6}\\ s.t.\;K_1=I'_1\\ \indent K_2=I'_2\\ \indent K_3=I'_3}} 
+\Bigg|
+\left(\prod_{x\in I_1}\widehat{\mathbf{1}}_{\ell_x}(\ip{\beta,h_x})\right)\cdot \\
+& \hphantom{{}=\sum_{\vec{\ell}}\sum_{0\leq i+j+l\leq n-t+1} \sum_{\substack{I'_1\subseteq I_1,|I'_1|=i\\ I'_2\subseteq I_2,|I'_2|=j\\ I'_3\subseteq I_3,|I'_3|=l\\}} \sum_{\substack{\beta\in \F^{n-t+1}_p\setminus{\{0\}} s.t.\\ K_1=I'_1\\ K_2=I'_2\\ K_3=I'_3}}} 
+\left(\prod_{y\in I_2}\widehat{\mathbf{1}}_{\ell_y}(\ip{\beta,h_y})\right)\cdot 
+\left(\prod_{z\in I_3}\widehat{\mathbf{1}}_{\ell_z}(\ip{\beta,h_z})\right)
+\Bigg|\nonumber \\ 
+&\nonumber \\
+%%% A.6
+&= \sum_{\vec{\ell}}\sum_{0\leq i+j+l\leq n-t+1} \; \sum_{\substack{I'_1\subseteq I_1,|I'_1|=i\\ I'_2\subseteq I_2,|I'_2|=j\\ I'_3\subseteq I_3,|I'_3|=l\\}}S_{I'_1,I'_2,I'_3}
+%%%21
+\end{align}}
+
+Recall $H$ is a matrix who's columns span $C^\bot$, and let $h_j$ denote the $j$'s row of $H$.
+Similarly to~\cite{EPRINT:BDIR19}, the next step is to bound the last expression in the chain using the Cauchy-Schwarz inequality.
+The main innovation we introduce is splitting the sum in the expression into several sums as in Equation~\ref{eq:5}, and applying the bound separately to each sum.
+Note the implicit definition of $S_{I'_1,I'_2,I'_3}$ in the last line.
+
+\noindent Let us denote 
+%\[B_{i,j,l}=\{\beta\in C^\bot\setminus{\{0\}}|\{k\in I_1|\ip{\beta,h_k}=0\}=i, |\{k\in I_2|\ip{\beta,h_k}=0\}|=j,|\{k\in I_3|\ip{\beta,h_k}=0\}|=l\}.\] 
+$$B_{i,j,l}=\big\{\beta\in  \F^{n-t+1}_p\setminus{\{0\}} \Big| \left| K_1 \right|=i, \left| K_2 \right|=j, \left| K_3 \right|=l\big\}.$$  
+\noindent We further denote 
+% $B_{I'_1,I'_2,I'_3}=\{\beta\in B_{i,j,l} \Big| \forall k\in [3]\{u\in I_k|\ip{\beta,h_u}=0\}=I'_k\}$.
+$$B_{I'_1,I'_2,I'_3}=\big\{\beta\in B_{i,j,l} \Big| I'_1=K_1, I'_2=K_2, I'_3=K_3 \big\}. $$
+
+%We denote the subset $B'_{I'_1,I'_2,I'_3}$ of %$B_{I'_1,I'_2,I'_3}$ where $\bigcup_{i} I'_i$ is the \emph{exact} 
+
+\noindent Rewriting the above inequality, we get
+
+{\allowdisplaybreaks
+\begin{align}
+&\SD{\vec{L}(C)}{\vec{L}(\F^n_p)} \nonumber\\
+%%% A.7
+&\leq \sum_{\vec{\ell}} \sum_{0\leq i+j+l\leq n-t+1} \; \sum_{ \substack{\beta\in B_{i,j,l} \\ s.t.\; |K_1|=i,\\ \indent |K_2|=j,\\ \indent |K_3|=l}} \left| \left( \prod_{x\in I_1}\widehat{\mathbf{1}}_{\ell_x}(\ip{\beta,h_x}) \right) \cdot \left( \prod_{y\in I_2}\widehat{\mathbf{1}}_{\ell_y}(\ip{\beta,h_y}) \right)	\right| \cdot \label{eq-5} \\
+&\hphantom{{}=\leq \sum_{\vec{\ell}} \sum_{0\leq i+j+l\leq n-t+1} \sum_{	\substack{\beta\in B_{i,j,l} s.t.\\ |K_1|=i,\\ |K_2|=j,\\|K_3|=l}}}\max_{\beta\in B_{i,j,l}} \left| \prod_{z\in I_3} \widehat{\mathbf{1}}_{\ell_z}(\ip{\beta,h_z}) \right| \nonumber \\ &\nonumber \\
+%%% A.8
+&\leq \sum_{\vec{\ell}} \sum_{0\leq i+j+l\leq n-t+1} \; \sum_{\substack{I'_1\subseteq I_1,|I'_1|=i, \\I'_2\subseteq I_2,|I'_2|=j, \\I'_3\subseteq I_3,|I'_3|=l}} \sqrt{\sum_{\substack{\beta\in B_{I'_1,I'_2,I'_3}}} \prod_{x\in I_1}|\widehat{\mathbf{1}}_{\ell_x}(\ip{\beta,h_x})|^2}\;\;\cdot \label{eq:7} \\
+&\hphantom{{}=\leq \sum_{\vec{\ell}} \sum_{0\leq i+j+l\leq n-t+1} \sum_{\substack{I'_1\subseteq I_1,|I'_1|=i,\\I'_2\subseteq I_2,|I'_2|=j,\\I'_3\subseteq I_3,|I'_3|=l}}} \sqrt{\sum_{\substack{\beta\in B_{I'_1,I'_2,I'_3}}} \prod_{y\in I_2}|\widehat{\mathbf{1}}_{\ell_y}(\ip{\beta,h_y})|^2} \cdot\max_{\beta\in B_{i,j,l}}\left|\prod_{z\in I_3}\widehat{\mathbf{1}}_{\ell_z}(\ip{\beta,h_z})\right| \nonumber
+%%%23
+\end{align}}
+
+The inequality~\ref{eq-5} is simply due to splitting the sum according to the \emph{exact} locations of $0$ coordinates in $H\beta^T$.
+The inequality~\ref{eq:7} is by Cauchy-Schwartz, where the maximum is taken over a larger set than needed, which clearly only increases the bound.
+
+To continue, we will use the following technical observation.
+
+\begin{observation}
+\label{clm:tech}
+For sets $A_1,A_2$ with $|A_1|+|A_2|=p$, we have $\sum\limits_{i\in[2]}\sqrt{\sum\limits_{\alpha\neq 0}|\widehat{\vec{1}}_{A_i}(\alpha)|^2}\leq 1$.
+\end{observation}
+
+\begin{proof}
+By Parseval's identity, we have
+$||\widehat{\vec{1}}_{A_i}||^2_2 = ||\vec{1}_{A_i}||^2_2=\frac{|A_i|}{p}$. 
+Let us denote $q_i=\frac{|A_i|}{p}$.
+Thus
+%\[||1_{A_i}||_2=\sqrt{\sum_{\alpha\neq 0}|\hat{A_i}(\alpha)|^2} = \sqrt{q_i - q^2_i},\]%
+$$\sum_{\alpha\neq 0}|\widehat{\vec{1}}_{A_i}(\alpha)|^2 = q_i - q^2_i$$
+as $|\widehat{\vec{1}}_{A_i}(0)|=q_i$. Thus, we have
+\begin{equation}
+%%% A.9
+\label{eq:1}
+\sum^2_{i=1}\sqrt{\sum_{\alpha\neq 0}|\widehat{\vec{1}}_{A_i}(\alpha)|^2} = \sqrt{q_1 - q^2_1} + \sqrt{q_2 - q^2_2}
+\end{equation}
+We denote $g(x)=\sqrt{x(1-x)}$ and observe that the expression in Equation~\ref{eq:1} equals $g(q_1)+g(1-q_1)=2g(q_1)$ (as $q_2=(1-q_1)$ and $g(q) = g(1-q)$).
+The maximum of $2g(q_1)$ in $[0,1]$ is easily seen to be obtained at $q_1=0.5$, and equal $1$.
+\footnote{Part of our gain comes from a more careful analysis for the case of two sets. Here we compute the maximum exactly instead of using concavity arguments to bound it, as is done in~\cite{EPRINT:BDIR19}. This is not surprising, because they did not attempt to optimize bounds for the case of $m=1$.}
+\end{proof}
+Let us bound the contribution of the portion a single $I'_1,I'_2,I'_3$ contributed to the expression
+in Equation~\ref{eq:7} - 
+we denote this contribution by $S'_{I'_1,I'_2,I'_3}$. 
+
+{\allowdisplaybreaks
+\begin{align}
+&S'_{I'_1,I'_2,I'_3}\nonumber\\ \nonumber \\
+%%% A.10
+&=\sum_{\vec{\ell}} \sqrt{\sum_{\substack{\beta\in B_{I'_1,I'_2,I'_3}}} \prod_{x\in I_1}|\widehat{\mathbf{1}}_{\ell_x}(\ip{\beta,h_x})|^2}\cdot \sqrt{\sum_{\substack{\beta\in B_{I'_1,I'_2,I'_3}}} \prod_{y\in I_2}|\widehat{\mathbf{1}}_{\ell_y}(\ip{\beta,h_y})|^2} \cdot \label{eq-8} \\ \nonumber
+&\hphantom{{}=\sum_{\vec{\ell}}} \max_{\beta\in B_{i,j,l}}\left| \prod_{z\in I_3}\widehat{\mathbf{1}}_{\ell_z}(\ip{\beta,h_z})\right| \\ \nonumber \\
+%%% A.11
+&\leq \sum_{\vec{\ell}} \sqrt{ \prod_{x\in I'_1}(\frac{|A_x|}{p})^2 \cdot \prod_{x\in \freeione}\left(\sum_{\alpha\in\F_p\setminus{\{0\}}} |\widehat{\mathbf{1}}_{\ell_x}(\alpha)|^2\right)\cdot \prod_{x\in I_1\setminus{(\freeione\cup I'_1})} \max_{\alpha\in\F_p\setminus{\{0\}}}|\widehat{\mathbf{1}}_{\ell_x}(\alpha)|^2 \label{eq-9}}\cdot\\\nonumber
+&\hphantom{{}=\sum_{\vec{\ell}}}\sqrt{ \prod_{y\in I'_2}(\frac{|A_y|}{p})^2 \cdot \prod_{y\in \freeitwo}\left(\sum_{\alpha\in\F_p\setminus{\{0\}}} |\widehat{\mathbf{1}}_{\ell_y}(\alpha)|^2\right)\cdot \prod_{y\in I_2\setminus{(\freeitwo\cup I'_2})} \max_{\alpha\in\F_p\setminus{\{0\}}}|\widehat{\mathbf{1}}_{\ell_y}(\alpha)|^2\label{eq-10} }\cdot\\\nonumber
+&\hphantom{{}=\sum_{\vec{\ell}}}\prod_{z\in I'_3}(\frac{|A_z|}{p}) \cdot \prod_{z\in I_3\setminus{I'_3}}|\max_{\alpha\in \F_p\setminus{\{0\}}}\widehat{\mathbf{1}}_{\ell_z}(\alpha)|
+\end{align}}
+
+\noindent Therefore we have
+\begin{align} \label{eq:A.12}
+%%% A.12
+\SD{\vec{L}(C)}{\vec{L}(\F^n_p)} \leq \sum_{\substack{(I'_1,I'_2,I'_3)\\ s.t. \; \forall j \in [3] \; I'_j\subseteq I_j, \\ \;\;\;\; | \bigcup_{j \in [3]} I'_j | \leq n-t+1}} S'_{I'_1,I'_2,I'_3}
+%|\bigcup\limits_{j \in [3]} I'_j|\leq n-t+1}S'_{I'_1,I'_2,I'_3}
+%|I'_1 \cup I'_2 \cup I'_3|
+\end{align}
+
+We start by separately bounding each of the sums $S'_{I'_1,I'_2,I'_3}$.
+
+\noindent We define the notation $\freeind{\cdot}{\cdot}{\cdot}{\cdot}$ and explain the above sequence of inequalities next. 
+
+For $I\subseteq [n]$ satisfying $|I|\geq n-t+1$ and $I'_1,I'_2,I'_3$
+with $|\cup_{j\in [3]}I'_j|\leq n-t+1$, we let $\freeind{I}{I'_1}{I'_2}{I'_3}$ denote a subset of $I\setminus{\cup_{j\in [3]}I'_j}$ of size $n-t+1-|\cup_{j\in [3]}I'_j|$ (picked arbitrarily, say according to lexicographic order). When $I'_1,I'_2,I'_3$ are clear from the context, we abbreviate $\freei=\freeind{I_i}{I'_1}{I'_2}{I'_3}$.
+
+Consider a superset $B'_{I'_1,I'_2,I'_3}$ of $B_{I'_1,I'_2,I'_3}$ consisting of all $\beta\in \F^{n-t+1}_p$ such that
+$H\beta^T$ has 0's at all coordinates $\bigcup_{j \in [3]} I'_j$, but may as well have $0$'s \emph{elsewhere}.
+Restricting $\beta$ to $B'_{I'_1,I'_2,I'_3}$
+results in a linear code $B'=\{H\beta^T|\beta\in B'_{I'_1,I'_2,I'_3}\}$.
+From now on, for a set $B\subseteq \F^{n-t+1}_p$ we abbreviate the multi-set 
+$\{H\beta^T|\beta\in B\}$ by $H\cdot B$.
+It is well known that $C$ corresponding to $(n,t)$-Shamir secret sharing scheme (which is a special case of a Massey code) is $\mdscode{n}{\codedim=t-1}{\F_p}$ code. Therefore, $C^\bot$ 
+is $\mdscode{n}{\dualcodedim = n-t+1}{\F_p}$ code. Therefore (holds for all linear MDS  codes), every set of $n - t + 1$ rows of $H$ are independent.
+Therefore, the resulting linear code $B_I$ \footnote{Jumping ahead, we will only consider $B_I$ for $I\in \{I_1,I_2\}$.}, projected onto any  subset $I\subseteq [n]$ with $|I|\geq n-t+1$, is the set of all vectors of the form $(\myvec{0},\vec{g},f^\bot(\vec{g}))$ where: 
+\begin{itemize}
+\item $\myvec{0}$ is a vector of 0's corresponding to the coordinate set $I\cap (I'_1\cup I'_2\cup I'_3)$.
+\item $\vec{g}$ is an arbitrary vector in $\F^{|\freeind{I}{I'_1}{I'_2}{I'_3}|}_p$.
+%\footnote{The fact that all vectors here appear follows from special properties of $C^\bot$ as dual to Shamir. It does not necessarily hold for any code with $H$ satisfying.} 
+
+\item $f^\bot(\vec{g})$ is the (vector) value at coordinates $I\setminus {\left(\bigcup_{j \in [3]} I'_j\cup \freeind{I}{I'_1}{I'_2}{I'_3} \right)}$.
+This value is obtained by applying the linear function $f^\bot$, determined by $C^\bot$, to $(\vec{0},\vec{g})$ (that together determine the codeword), complementing the required coordinates. 
+\end{itemize}
+
+Now, the set $H\cdot B_{I'_1,I'_2,I'_3}$ is a subset of $H\cdot B'_{I'_1,I'_2,I'_3}$, where additionally the codeword at coordinates $I_1\setminus I_i$ (similarly for the $I_2$ part) must be non-0. 
+The transition from Equation~\ref{eq-8} to 
+Equation~\ref{eq-9}, bounds each of the first two $\sqrt{\cdot}$ expressions by summing over $\beta$ in $B_{I'_1,I'_2,I'_3}$, by going over all $\vec{g}$ values not containing a $0$ coefficient, and \emph{assuming} that the resulting $f^\bot(\vec{g})$ also has no $0$ coefficients (taking the maximal possible coefficient as a bound for each).
+However, for some such $\vec{g}$'s, additional $0$ coefficients may turn up in $f^\bot(\vec{g})$, so the contribution of that $\beta$ shouldn't have been accounted for (as $\beta\notin B_{I'_1,I'_2,I'_3}$). But, this may only increase the upper bound.
+This only potentially increasing the expression, as all summands are non-negative (in particular, each $\vec{g}$ may appear at most once, as in $H\cdot B_{I'_1,I'_2,I'_3}$). A similar phenomena occurs in the part for responding to $I_2$, so the inequality follows.
+Another fact we use in this transition, is that $\widehat{\myvec{1}}_{\ell_i}(0)=\frac{|A_{i,\ell_i}|}{p}$ for any boolean function $\myvec{1}_{\ell_i}$ we consider.
+
+Further simplifying, we get:
+
+\begin{align}
+&S'_{I'_1,I'_2,I'_3} \nonumber\\ 
+%%% A.13
+&=\sum_{\ell} \prod_{i\in I'_1 \cup I'_2 \cup I'_3}\frac{|A_{i,\ell_i}|}{p} \cdot \prod_{\substack{i\in \freeione\cup\\ \; \freeitwo}} \sqrt{\frac{|A_{i,\ell_i}|}{p}\left(1-\frac{|A_{i,\ell_i}|}{p}\right)}\cdot \label{A.13}\\
+&\hphantom{{}==\prod_{i\in I'_1 \cup I'_2 \cup I'_3}\left(\frac{|A_{i,\ell_i}|}{p}\right)}\prod_{\substack{i\in I_1\setminus{(\freeione\cup I'_1})\cup\\ \;\;\; I_2\setminus{(\freeitwo\cup I'_2})\cup\\  I_3\setminus{I'_3}}} \max_{\alpha\in\F_p\setminus{\{0\}}} |\widehat{\mathbf{1}}_{\ell_i}(\alpha)| \nonumber\\ \nonumber \\
+%%% A.14 
+&=\prod_{i\in I'_1 \cup I'_2 \cup I'_3} \; \sum_{\ell_i\in \{0,1\}}\frac{|A_{i,\ell_i}|}{p} \cdot \prod_{\substack{i\in\freeione\cup\\ \; \freeitwo}}     \left(\sum_{\ell_i\in\{0,1\}}\sqrt{\frac{|A_{i,\ell_i}|}{p}\left(1-\frac{|A_{i,\ell_i}|}{p}\right)}\right)\cdot \nonumber\\
+&\hphantom{{}=\prod_{i\in I'_1 \cup I'_2 \cup I'_3} \; \sum_{\ell_i\in \{0,1\}}\frac{|A_{i,\ell_i}|}{p}}\prod_{\substack{ i\in I_1\setminus{(\freeione\cup I'_1})\cup\\ \;\;\; I_2\setminus{(\freeitwo\cup I'_1})\cup\\ I_3\setminus{I'_3}}} \left(\sum_{\ell_i\in\{0,1\}}\max_{\alpha\in\F_p\setminus{\{0\}}}|\widehat{\mathbf{1}}_{\ell_i}(\alpha)|\right) \nonumber\\ \nonumber \\
+%%% A.15
+&\leq c^{j + i + 2l + n - 2(n-t+1) - k}_1=O(c^{2t - n + i + j + l}_1) \label{A.15}
+\end{align}
+
+Here the equality~\ref{A.13} is simply using Parseval's identity, and the observation that $\widehat{\mathbf{1}}_{\ell_i}(0)=\frac{|A_{i,\ell_i}|}{p}$, and additionally simple arithmetic manipulation.
+The inequality~\ref{A.15} relies on Claim~\ref{clm:tech} for upper bounding each multiplicand in the second product by 1.
+Each multiplicand in the first product sums to 1, and each multiplicand in the third product is upper bounded by $c_1$, as follows from Lemma~\ref{lem:sumlibound}.
+%Here $c_m = \frac{2^m\sin(\frac{\pi}{2^m})}{p\sin(\frac{\pi}{p})}$ is as defined in~\cite{EPRINT:BDIR19}.
+
+
+Let us denote by
+$$S'_{i,j,l}=\sum_{\substack{I'_1\subseteq I_1,|I_1|=i,\\
+I'_2\subseteq I_2,|I_2|=j,\\I'_3\subseteq I_3,|I_3|=l}}S'_{I'_1,I'_2,I'_3} .$$ 
+The number of summands $S'_{i,j,l}$ in the bound~\ref{eq:A.12}, rewritten in terms of the $S'_{i,j,l}$s, is only $poly(n)$ ($O(n^2)$, to be precise). 
+Thus to bound $\SD{\vec{L}(C)}{\vec{L}(\F^n_p)}$ we may as well bound $t$ based on the maximum among the sums:
+
+\begin{align}
+  \log{\SD{\vec{L}(C)}{\vec{L}(\F^n_p)}} &\leq \log \left(\sum_{i+j+l\leq n-t+1}S'_{i,j,l} \right) \nonumber \\
+  &\leq \log \left(O \left((n-t+1)^3 \right) \max_{i,j,l} S'_{i,j,l} \right) \nonumber \\
+  &\leq \log{\max_{i,j,l}S'_{i,j,l}} + O(\log{n}) \nonumber
+\end{align}
+
+Unless stated otherwise, here and elsewhere $\log$ stands for $\log_2$.
+As the bound on the maximum $\log(S'_{i,j,l})$ will be $\Omega(n)$ (for any $t = c\cdot n$ for constant $c$), we may indeed
+search for $t$ for which $\log \left( \max_{i,j}S'_{i,j}\right) = -\Omega(n)$ (for arbitrarily small non-0 hidden constants, so the $O(\log(n))$ factor indeed has no effect).
+
+Let us fix some $n-t+1=\gamma n$ for some constant $\gamma\in (0,1)$. We want to find the range of $\gamma$ values for which $\max\limits_{i+j+l\leq n-t+1}S'_{i,j,l}$ is $2^{-\Omega(n)}$.
+Let $p$ and $n$ both go to infinity. The above requirement translates into the following,
+\begin{align}
+&\log \left(\max_{i+j+l\leq n-t+1}S'_{i,j,l} \right) \nonumber\\ \nonumber \\ 
+&\leq \max_{i+j+l\leq n-t+1} \Bigg(\log \bigg(\sum_{\substack{
+I'_1\subseteq I_1,|I_1|=i,\\
+I'_2\subseteq I_2,|I_2|=j,\\
+I'_3\subseteq I_3,|I_3|=l}}S'_{I'_1,I'_2,I'_3} \bigg) \Bigg) \nonumber\\ \nonumber\\
+&\leq \max_{i+j+l\leq n-t+1} \Bigg(\log \left(\binom{n-t+1}{i} \cdot \binom{n-t+1}{j} \cdot \binom{2t - 2 - n}{l} \cdot \max_{I'_1,I'_2,I'_3}S'_{I'_1,I'_2,I'_3} \right) \Bigg)\label{eq-15}\\ \nonumber \\
+&\leq n\cdot \Big(\gamma \cdot \Ent{a_1} + \gamma\cdot \Ent{a_2} + (1-2\gamma)\cdot \Ent{a_3\cdot b/(1-2\gamma)}- \nonumber \\
+& \hphantom{{}=n\cdot \big(\gamma} \big(1 + \gamma\cdot(a_1 + a_2 + a_3 - 2)\big)\log(c_1) \Big)+\mathrm{poly}\log(n)
+\end{align} 
+
+Here $a_1,a_2,a_3$ denote
+$\frac{i}{n-t+1},\frac{j}{n-t+1},\frac{l}{n-t+1}$ respectively. 
+In the last step, we use Stirling's approximation, $\log(n!)=n\log(n) - n \log e+ O(\log(n))$, neglecting the $O(\log(n))$ term. Also, we replace $c_1$ with its limit $\lim_{p\rightarrow \infty}$. In this case, $c_1$ tends (from above) to $\log(2/\pi)$. %With the bound function above being continuous, we will conclude that any $\gamma$ smaller than a certain $\gamma_0$ . 
+We conclude that the set of $\gamma$'s satisfying Equation~\ref{eq-l} below, result in $(n,(1-\gamma)n)$-Shamir being Leakage resilient, as required in Theorem~\ref{shamir}:% (the expression below is a bound on the log of the leakage error):
+\begin{align}
+&\max_{a_1,a_2,a_3} \Big(\Ent{a_1}+\Ent{a_2}+(1-2\gamma)\cdot \Ent{a_3\cdot \gamma/(1-2\gamma)}- \label{eq-l} \\
+&\hphantom{{}=n\cdot \big(\Ent{a_1}+\Ent{}} \big(1 + \gamma\cdot(a_1 + a_2 + a_3 - 2)\big)\log(2/\pi) \Big) < 0 \nonumber
+\end{align} 
+
+In particular, the left hand side is well defined for all $0<\gamma<0.5$.
+Fix some $\gamma$, using standard multi-variate analytic techniques (on the expressions as a function of $a_1,a_2,a_3$) over the domain $\{(a_1,a_2,a_3)|a_1+a_2+a_3\leq 1,a_1,a_2,a_3\geq 0\}$, we get that $\gamma\leq 0.133n$ leads to a negative value.
+
+\noindent This concludes the proof of Theorem~\ref{shamir}.
